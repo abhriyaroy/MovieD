@@ -10,9 +10,6 @@ buildscript {
         def KOTLIN_VERSION = '1.3.61'
         classpath "com.android.tools.build:gradle:$GRADLE_VERSION"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.jetpackexample
+package com.example.movied
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
