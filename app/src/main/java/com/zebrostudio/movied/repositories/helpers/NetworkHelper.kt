@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder
 import com.zebrostudio.movied.repositories.models.MoviesApiResponseModel
 import com.zebrostudio.movied.utils.BASE_URL
 import com.zebrostudio.movied.utils.POPULAR_MOVIES_URL
-import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

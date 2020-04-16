@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
 apply from: '../versions.gradle'
 
 android {
@@ -48,6 +49,11 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
     // Lottie
     implementation "com.airbnb.android:lottie:$LOTTIE_VERSION"
+    // Lifecycle components
+    implementation "android.arch.lifecycle:extensions:$LIFECYCLE_VERSION"
+    kapt "android.arch.lifecycle:compiler:$LIFECYCLE_VERSION"
+    // Viewmodel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$VIEWMODEL_VERSION"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$JUNIT_VERSION"
