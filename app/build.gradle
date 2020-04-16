@@ -32,6 +32,9 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$APP_COMPAT_VERSION"
     implementation "androidx.core:core-ktx:$KOTLIN_X_VERSION"
     implementation "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
+    // Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE_VERSION"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINE_VERSION"
     // Koin for Android
     implementation "org.koin:koin-android:$KOIN_VERSION"
     implementation "org.koin:koin-androidx-viewmodel:$KOIN_VERSION"
@@ -40,6 +43,9 @@ dependencies {
     // Navigation component
     implementation "androidx.navigation:navigation-fragment:$NAVIGATION_FRAGMENT_VERSION"
     implementation "androidx.navigation:navigation-ui:$NAVIGATION_UI_VERSION"
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$JUNIT_VERSION"
