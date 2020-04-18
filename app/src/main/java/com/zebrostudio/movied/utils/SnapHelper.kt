@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 
-class SnapHelperOneByOne : LinearSnapHelper() {
+class SnapHelper : LinearSnapHelper() {
     override fun findTargetSnapPosition(
         layoutManager: RecyclerView.LayoutManager,
         velocityX: Int,
@@ -13,10 +13,8 @@ class SnapHelperOneByOne : LinearSnapHelper() {
         val currentView = findSnapView(layoutManager) ?: return RecyclerView.NO_POSITION
         val currentPosition = layoutManager.getPosition(currentView)
         return if (currentPosition == RecyclerView.NO_POSITION) {
-            println("no position second")
             RecyclerView.NO_POSITION
         } else {
-            println("current position")
             currentPosition
         }
     }

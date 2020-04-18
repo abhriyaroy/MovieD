@@ -11,9 +11,6 @@ import com.example.movied.R
 import com.zebrostudio.movied.viewmodels.MovieViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-/**
- * A simple [Fragment] subclass.
- */
 class SplashFragment : Fragment() {
 
     private val movieViewModel: MovieViewModel by sharedViewModel()

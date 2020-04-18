@@ -1,12 +1,9 @@
 package com.zebrostudio.movied.screens.adapters
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movied.R
 import com.zebrostudio.movied.repositories.models.MovieItemModel

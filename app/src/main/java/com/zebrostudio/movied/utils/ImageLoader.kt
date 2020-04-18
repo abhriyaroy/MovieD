@@ -14,11 +14,12 @@ class ImageLoaderImpl : ImageLoader {
     override fun loadImage(context: Context, imageView: ImageView, url: String) {
         with(
             RequestOptions()
-            .diskCacheStrategy(DiskCacheStrategy.ALL)){
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+        ) {
             Glide.with(context)
-                .load("https://image.tmdb.org/t/p/original$url")
+                .load(getMoviePosterUrl(url))
                 .apply(this)
                 .into(imageView)
-            }
+        }
     }
 }
