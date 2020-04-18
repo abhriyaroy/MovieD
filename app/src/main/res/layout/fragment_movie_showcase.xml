@@ -9,8 +9,6 @@
         android:id="@+id/bannerRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="false"
-        android:focusable="false"
         android:orientation="horizontal" />
 
     <com.zebrostudio.movied.circularrecyclerview.CircleRecyclerView

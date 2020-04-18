@@ -17,13 +17,12 @@ import com.zebrostudio.movied.circularrecyclerview.RotateXScaleYViewMode
 import com.zebrostudio.movied.screens.adapters.MovieBannerListAdapter
 import com.zebrostudio.movied.screens.adapters.MovieListAdapter
 import com.zebrostudio.movied.utils.ImageLoader
-import com.zebrostudio.movied.utils.SnapHelperOneByOne
+import com.zebrostudio.movied.utils.SnapHelper
 import com.zebrostudio.movied.utils.getOrientation
 import com.zebrostudio.movied.viewmodels.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_movie_showcase.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-
 
 class MovieShowcaseFragment : Fragment() {
 
@@ -32,8 +31,8 @@ class MovieShowcaseFragment : Fragment() {
     private var movieTilesDivider: Drawable? = null
     private var movieAdapter: MovieListAdapter? = null
     private var bannerAdapter: MovieBannerListAdapter? = null
-    private lateinit var movieSnapHelper: SnapHelperOneByOne
-    private lateinit var bannerSnapHelper: SnapHelperOneByOne
+    private lateinit var movieSnapHelper: SnapHelper
+    private lateinit var bannerSnapHelper: SnapHelper
 
 
     override fun onCreateView(
@@ -64,7 +63,7 @@ class MovieShowcaseFragment : Fragment() {
         movieAdapter = MovieListAdapter(imageLoader)
         recyclerView.adapter = movieAdapter
         recyclerView.setHasFixedSize(true)
-        movieSnapHelper = SnapHelperOneByOne()
+        movieSnapHelper = SnapHelper()
         movieSnapHelper.attachToRecyclerView(recyclerView)
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
