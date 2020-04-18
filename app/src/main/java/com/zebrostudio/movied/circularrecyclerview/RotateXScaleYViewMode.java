@@ -40,13 +40,6 @@ public class RotateXScaleYViewMode implements ItemViewMode {
 
         last = ((LinearLayoutManager) parent.getLayoutManager()).findLastVisibleItemPosition();
         first = ((LinearLayoutManager) parent.getLayoutManager()).findFirstVisibleItemPosition();
-
-        float factor = (1 / (float) (last - first));
-        if (rot > 0)
-            tilt(v, rot * (rot % factor == 0 ? mRontationRatio : rot % factor) * factor);
-        else
-            tilt(v, -rot * (rot % factor == 0 ? mRontationRatio : rot % factor) * factor);
-
     }
 
 

@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.example.movied.R
-import com.zebrostudio.movied.circularrecyclerview.CircleRecyclerView
 import com.zebrostudio.movied.circularrecyclerview.CircularHorizontalBTTMode
 import com.zebrostudio.movied.circularrecyclerview.RotateXScaleYViewMode
-import com.zebrostudio.movied.circularrecyclerview.RotateYScaleXViewMode
 import com.zebrostudio.movied.screens.adapters.MovieBannerListAdapter
 import com.zebrostudio.movied.screens.adapters.MovieListAdapter
 import com.zebrostudio.movied.utils.ImageLoader
@@ -57,7 +55,7 @@ class MovieShowcaseFragment : Fragment() {
     private fun setupRecyclerView() {
         recyclerView.layoutManager =
             if (requireContext().getOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
-                recyclerView.setViewMode(CircularHorizontalBTTMode(0f, true))
+                recyclerView.setViewMode(RotateXScaleYViewMode())
                 LinearLayoutManager(context, VERTICAL, false)
             } else {
                 recyclerView.setViewMode(CircularHorizontalBTTMode(0f, true))
@@ -78,20 +76,6 @@ class MovieShowcaseFragment : Fragment() {
                 }
             }
         })
-
-
-
-
-
-//            setOnScrollListener(object : CircleRecyclerView.OnScrollListener {
-//            override fun onScrolled(dx: Int, dy: Int) {
-//
-//            }
-//
-//            override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {}
-//
-//            override fun onScrollStateChanged(state: Int) {}
-//        })
 
     }
 
