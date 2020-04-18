@@ -1,4 +1,4 @@
-package com.example.jetpackexample
+package com.example.movied
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
