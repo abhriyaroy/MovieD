@@ -11,13 +11,13 @@
         android:layout_height="match_parent"
         android:clickable="false"
         android:focusable="false"
-        android:orientation="horizontal" />
+        android:orientation="vertical" />
 
     <com.zebrostudio.movied.circularrecyclerview.CircleRecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
