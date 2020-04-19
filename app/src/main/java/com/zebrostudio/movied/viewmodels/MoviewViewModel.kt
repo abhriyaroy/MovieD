@@ -9,15 +9,14 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel(private val movieDataRepository: MovieDataRepository) : ViewModel() {
 
-    val moviesLiveData = MutableLiveData<MoviesApiResponseModel>()
+    var moviesLiveData = MutableLiveData<MoviesApiResponseModel>()
 
     fun getPopularMovies() {
         viewModelScope.launch {
             movieDataRepository.getPopularMovies().let {
-                moviesLiveData.value = it
+                moviesLiveData.value = it.value
             }
         }
     }
-
 
 }

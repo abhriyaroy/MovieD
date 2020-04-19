@@ -18,10 +18,12 @@ private class AnimationListener(
 fun View.showAnimation(
     @AnimRes animResId: Int,
     fillAfter: Boolean = true,
+    delay : Long = 0,
     onAnimationRepeat: () -> Unit = {},
     onAnimationStart: () -> Unit = {},
     onAnimationEnd: () -> Unit = {}
 ) = with(AnimationUtils.loadAnimation(context, animResId)) {
+    startOffset = delay
     setAnimationListener(AnimationListener(onAnimationRepeat, onAnimationStart, onAnimationEnd))
     this.fillAfter = fillAfter
     startAnimation(this)

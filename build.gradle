@@ -3,15 +3,17 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
-        def  GRADLE_VERSION = '3.6.1'
+        def GRADLE_VERSION = '3.6.1'
         def KOTLIN_VERSION = '1.3.61'
         def KOTLIN_GRADLE_PLUGIN_VERSION = '1.3.61'
+        def NAVIGATION_SAFEARGS_VERSION = "2.2.1"
         classpath "com.android.tools.build:gradle:$GRADLE_VERSION"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_GRADLE_PLUGIN_VERSION"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$NAVIGATION_SAFEARGS_VERSION"
     }
 }
 
@@ -19,7 +21,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url 'https://jitpack.io' }
     }
 }
 

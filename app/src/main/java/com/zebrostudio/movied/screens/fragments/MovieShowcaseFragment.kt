@@ -1,13 +1,14 @@
 package com.zebrostudio.movied.screens.fragments
 
 import android.content.res.Configuration
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
@@ -24,16 +25,13 @@ import kotlinx.android.synthetic.main.fragment_movie_showcase.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class MovieShowcaseFragment : Fragment() {
+class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
 
     private val movieViewModel: MovieViewModel by sharedViewModel()
     private val imageLoader: ImageLoader by inject()
-    private var movieTilesDivider: Drawable? = null
     private var movieAdapter: MovieListAdapter? = null
     private var bannerAdapter: MovieBannerListAdapter? = null
     private lateinit var movieSnapHelper: SnapHelper
-    private lateinit var bannerSnapHelper: SnapHelper
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +57,7 @@ class MovieShowcaseFragment : Fragment() {
                 recyclerView.setViewMode(CircularHorizontalBTTMode(0f, true))
                 LinearLayoutManager(context, HORIZONTAL, false)
             }
-        movieAdapter = MovieListAdapter(imageLoader)
+        movieAdapter = MovieListAdapter(imageLoader, this)
         recyclerView.adapter = movieAdapter
         recyclerView.setHasFixedSize(true)
         movieSnapHelper = SnapHelper()
@@ -98,4 +96,35 @@ class MovieShowcaseFragment : Fragment() {
         })
     }
 
+    override fun handleClick(
+        view: View,
+        transitionName: String,
+        currentMovieUrl: String,
+        previousMovieUrl: String,
+        nextMovieUrl: String
+    ) {
+        val extras = FragmentNavigatorExtras(
+            view to transitionName
+        )
+        val action =
+            MovieShowcaseFragmentDirections.actionMovieShowcaseFragmentToMovieDetails(
+                transitionName = transitionName,
+                movieUrl = currentMovieUrl,
+                previousMovieUrl = previousMovieUrl,
+                nesxtMovieUrl = nextMovieUrl
+            )
+
+        requireView().findNavController().navigate(action, extras)
+    }
+
+}
+
+interface HandleMovieItemClickView {
+    fun handleClick(
+        view: View,
+        transitionName: String,
+        currentMovieUrl: String,
+        previousMovieUrl: String,
+        nextMovieUrl: String
+    )
 }
