@@ -47,5 +47,8 @@
         <argument
             android:name="nesxtMovieUrl"
             android:defaultValue='""' />
+        <argument android:name="movieData"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>

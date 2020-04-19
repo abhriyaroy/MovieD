@@ -49,7 +49,7 @@ class MovieListAdapter(
             }
             holder.showImage(it.posterUrl)
             holder.showMovieTitle(it.title)
-            holder.attachClickListener(it.posterUrl, previousUrl, nextUrl)
+            holder.attachClickListener(it, previousUrl, nextUrl)
         }
     }
 
@@ -75,15 +75,14 @@ class ViewHolder(
         itemView.movieTitle.text = title
     }
 
-    fun attachClickListener(url: String, previousUrl: String, nextUrl: String) {
+    fun attachClickListener(item: MovieItemModel, previousUrl: String, nextUrl: String) {
         itemView.movieCard.setOnClickListener {
-            it.transitionName = url
-            itemView.moviePoster
-                .showAnimation(R.anim.shrink_fade_out, onAnimationEnd = {
-                    withDelayOnMain(50) {
-                        handleMovieItemClickView.handleClick(it, url, url, previousUrl, nextUrl)
-                    }
-                })
+            it.transitionName = item.posterUrl
+            itemView.moviePosterCard
+                .showAnimation(R.anim.shrink_fade_out)
+            withDelayOnMain(160) {
+                handleMovieItemClickView.handleClick(it,  previousUrl, nextUrl, item)
+            }
         }
     }
 

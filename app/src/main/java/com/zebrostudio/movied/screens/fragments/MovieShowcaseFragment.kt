@@ -15,12 +15,15 @@ import androidx.recyclerview.widget.RecyclerView.*
 import com.example.movied.R
 import com.zebrostudio.movied.circularrecyclerview.CircularHorizontalBTTMode
 import com.zebrostudio.movied.circularrecyclerview.RotateXScaleYViewMode
+import com.zebrostudio.movied.repositories.models.MovieItemModel
 import com.zebrostudio.movied.screens.adapters.MovieBannerListAdapter
 import com.zebrostudio.movied.screens.adapters.MovieListAdapter
 import com.zebrostudio.movied.utils.ImageLoader
+import com.zebrostudio.movied.utils.Serializer
 import com.zebrostudio.movied.utils.SnapHelper
 import com.zebrostudio.movied.utils.getOrientation
 import com.zebrostudio.movied.viewmodels.MovieViewModel
+import kotlinx.android.synthetic.main.fragment_movie_details.view.*
 import kotlinx.android.synthetic.main.fragment_movie_showcase.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -29,6 +32,7 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
 
     private val movieViewModel: MovieViewModel by sharedViewModel()
     private val imageLoader: ImageLoader by inject()
+    private val serializer: Serializer by inject()
     private var movieAdapter: MovieListAdapter? = null
     private var bannerAdapter: MovieBannerListAdapter? = null
     private lateinit var movieSnapHelper: SnapHelper
@@ -98,20 +102,20 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
 
     override fun handleClick(
         view: View,
-        transitionName: String,
-        currentMovieUrl: String,
         previousMovieUrl: String,
-        nextMovieUrl: String
+        nextMovieUrl: String,
+        movieData: MovieItemModel
     ) {
+        requireView().movieTitle.transitionName = movieData.originalName
         val extras = FragmentNavigatorExtras(
-            view to transitionName
+            view to movieData.posterUrl,
+            requireView().movieTitle to movieData.originalName
         )
         val action =
             MovieShowcaseFragmentDirections.actionMovieShowcaseFragmentToMovieDetails(
-                transitionName = transitionName,
-                movieUrl = currentMovieUrl,
                 previousMovieUrl = previousMovieUrl,
-                nesxtMovieUrl = nextMovieUrl
+                nesxtMovieUrl = nextMovieUrl,
+                movieData = serializer.getStringFromObj(movieData)
             )
 
         requireView().findNavController().navigate(action, extras)
@@ -122,9 +126,8 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
 interface HandleMovieItemClickView {
     fun handleClick(
         view: View,
-        transitionName: String,
-        currentMovieUrl: String,
         previousMovieUrl: String,
-        nextMovieUrl: String
+        nextMovieUrl: String,
+        movieData: MovieItemModel
     )
 }
