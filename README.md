@@ -9,6 +9,7 @@
 
 - [Introduction](#introduction) <br>
 - [UI Samples](#ui-samples) <br>
+- [Things to Look Out For](#things-to-look-out-for)<br>
 - [Installation](#installation) <br>
 - [Acknowledgements](#acknowledgements) <br>
 - [About the Author](#about-the-author)<br>
@@ -18,6 +19,7 @@
 MovieD is a beautiful looking Movie list based project to showcase the [Android Architecture components](https://developer.android.com/topic/libraries/architecture).
 It implements:-
 - the [MVVM](https://medium.com/upday-devs/android-architecture-patterns-part-3-model-view-viewmodel-e7eeee76b73b) pattern
+- DI using [Koin](https://github.com/InsertKoinIO/koin)
 - using [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) to make network calls with the help of [Retrofit](https://square.github.io/retrofit/)
 - serves and maintains the data using [LiveData](https://developer.android.com/reference/android/arch/lifecycle/LiveData)
 - navigation across the app happens after harnessing the power of the [Navigation component](https://developer.android.com/guide/navigation), also showcasing how to achieve shared element transition using Navigation component
@@ -35,6 +37,18 @@ Most other examples of the Architecture components that I could find on GitHub w
   <img height="600" src="resources/portrait.gif">
 </p>
 
+## Things to Look Out For
+
+The main features illustrated in this project are :-
+
+- MVVM Architecture
+- How a ViewModel can survive configuration changes
+- Dependency Injection using KOIN
+- How LiveData works
+- Simple Navigation component
+- Advanced Navigation component (Shared element transition)
+- Coroutines basic
+
 ## Installation
 To successfully run this project, you would need an `API key` which you can easily get from [here](https://www.themoviedb.org/login). Once you have obtained the `API key` please create a file named `ApiKey.kt` at the path :-
      <br> <br> `/app/src/main/java/com/zebrostudio/movied/utils/ApiKey.kt`<br><br>
@@ -44,7 +58,7 @@ And you should be good to go!
               
 ## Acknowledgements
 A big thanks to [TMDB](https://www.themoviedb.org/?language=en-US) for providing the amazing API from where the movies are sourced.<br>
-The UI was inspired from this awesome [Design work](https://dribbble.com/shots/8257559-Movie-2-0) on Dribble
+The UI was inspired from this awesome [design](https://dribbble.com/shots/8257559-Movie-2-0) on Dribble
 
 
 ## About the Author
