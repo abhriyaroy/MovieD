@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply from: '../versions.gradle'
 
 android {
@@ -25,6 +26,15 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
 }
 
 dependencies {
@@ -43,7 +53,9 @@ dependencies {
     implementation "org.koin:koin-androidx-ext:$KOIN_VERSION"
     // Navigation component
     implementation "androidx.navigation:navigation-fragment:$NAVIGATION_FRAGMENT_VERSION"
+    implementation "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_FRAGMENT_VERSION"
     implementation "androidx.navigation:navigation-ui:$NAVIGATION_UI_VERSION"
+    implementation "androidx.navigation:navigation-ui-ktx:$NAVIGATION_UI_VERSION"
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
@@ -58,6 +70,8 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$RECYCLER_VIEW_VERSION"
     // Glide
     implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    // RatingView
+    implementation "me.zhanghai.android.materialratingbar:library:$RATING_VIEW_VERSION"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$JUNIT_VERSION"

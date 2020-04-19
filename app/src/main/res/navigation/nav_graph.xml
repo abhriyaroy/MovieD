@@ -24,11 +24,31 @@
         android:label="fragment_movie_showcase"
         tools:layout="@layout/fragment_movie_showcase">
         <action
-            android:id="@+id/action_splashFragment_to_movieShowcaseFragment"
-            app:destination="@id/movieShowcaseFragment"
-            app:enterAnim="@anim/enter"
-            app:exitAnim="@anim/exit"
-            app:popEnterAnim="@anim/pop_enter"
-            app:popExitAnim="@anim/pop_exit" />
+            android:id="@+id/action_movieShowcaseFragment_to_movieDetails"
+            app:destination="@id/movieDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetails"
+        android:name="com.zebrostudio.movied.screens.fragments.MovieDetailsFragment"
+        android:label="fragment_movie_details"
+        tools:layout="@layout/fragment_movie_details" >
+        <argument
+            android:name="transitionName"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="movieUrl"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="previousMovieUrl"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="nesxtMovieUrl"
+            android:defaultValue='""' />
+        <argument android:name="movieData"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>
