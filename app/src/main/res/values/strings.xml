@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">JetpackExample</string>
+    <string name="app_name">MovieD</string>
+
+    <string name="tag_is_center">tagIsCenter</string>
+    <string name="view_details">View Details</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

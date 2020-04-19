@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.zebrostudio.movied.screens.fragments.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_movieShowcaseFragment"
+            app:destination="@id/movieShowcaseFragment"
+            app:enterAnim="@anim/enter"
+            app:exitAnim="@anim/exit"
+            app:popEnterAnim="@anim/pop_enter"
+            app:popExitAnim="@anim/pop_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieShowcaseFragment"
+        android:name="com.zebrostudio.movied.screens.fragments.MovieShowcaseFragment"
+        android:label="fragment_movie_showcase"
+        tools:layout="@layout/fragment_movie_showcase">
+        <action
+            android:id="@+id/action_movieShowcaseFragment_to_movieDetails"
+            app:destination="@id/movieDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetails"
+        android:name="com.zebrostudio.movied.screens.fragments.MovieDetailsFragment"
+        android:label="fragment_movie_details"
+        tools:layout="@layout/fragment_movie_details" >
+        <argument
+            android:name="transitionName"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="movieUrl"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="previousMovieUrl"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="nesxtMovieUrl"
+            android:defaultValue='""' />
+        <argument android:name="movieData"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+</navigation>

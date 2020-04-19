@@ -1,4 +1,4 @@
-package com.example.jetpackexample
+package com.example.movied
 
 import org.junit.Test
 

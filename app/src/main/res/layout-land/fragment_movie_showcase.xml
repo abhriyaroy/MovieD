@@ -1,0 +1,21 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zebrostudio.movied.screens.fragments.MovieShowcaseFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bannerRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+
+    <com.zebrostudio.movied.circularrecyclerview.CircleRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

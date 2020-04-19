@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply from: '../versions.gradle'
 
 android {
     compileSdkVersion 29
@@ -8,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.jetpackexample"
-        minSdkVersion 16
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -23,15 +26,55 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    implementation "androidx.appcompat:appcompat:$APP_COMPAT_VERSION"
+    implementation "androidx.core:core-ktx:$KOTLIN_X_VERSION"
+    implementation "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
+    // Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE_VERSION"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINE_VERSION"
+    // Koin for Android
+    implementation "org.koin:koin-android:$KOIN_VERSION"
+    implementation "org.koin:koin-androidx-viewmodel:$KOIN_VERSION"
+    implementation "org.koin:koin-androidx-fragment:$KOIN_VERSION"
+    implementation "org.koin:koin-androidx-ext:$KOIN_VERSION"
+    // Navigation component
+    implementation "androidx.navigation:navigation-fragment:$NAVIGATION_FRAGMENT_VERSION"
+    implementation "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_FRAGMENT_VERSION"
+    implementation "androidx.navigation:navigation-ui:$NAVIGATION_UI_VERSION"
+    implementation "androidx.navigation:navigation-ui-ktx:$NAVIGATION_UI_VERSION"
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    // Lottie
+    implementation "com.airbnb.android:lottie:$LOTTIE_VERSION"
+    // Lifecycle components
+    implementation "android.arch.lifecycle:extensions:$LIFECYCLE_VERSION"
+    kapt "android.arch.lifecycle:compiler:$LIFECYCLE_VERSION"
+    // Viewmodel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$VIEWMODEL_VERSION"
+    // Recyclerview
+    implementation "androidx.recyclerview:recyclerview:$RECYCLER_VIEW_VERSION"
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    // RatingView
+    implementation "me.zhanghai.android.materialratingbar:library:$RATING_VIEW_VERSION"
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation "junit:junit:$JUNIT_VERSION"
+    androidTestImplementation "androidx.test.ext:junit:$JUNIT_EXTENSION_VERSION"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$ESPRESSO_CORE_VERSION"
 }
