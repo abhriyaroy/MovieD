@@ -28,10 +28,13 @@ Most other examples of the Architecture components that I could find on GitHub w
 
 ## UI Samples
 
+### Landscap
+
 <p align="center">
   <img height="400" src="resources/landscape.gif">
 </p>
 
+### Portrait
 
 <p align="center">
   <img height="600" src="resources/portrait.gif">
