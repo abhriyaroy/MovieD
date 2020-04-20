@@ -30,6 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         app:cardCornerRadius="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/mainMoviePosterCard"
         app:layout_constraintTop_toTopOf="parent">
@@ -126,6 +128,7 @@
                 android:id="@+id/movieDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
                 android:layout_margin="24dp"
                 android:layout_marginTop="24dp"
                 android:ellipsize="end"

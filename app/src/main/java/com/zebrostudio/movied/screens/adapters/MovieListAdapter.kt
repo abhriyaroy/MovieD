@@ -78,11 +78,7 @@ class ViewHolder(
     fun attachClickListener(item: MovieItemModel, previousUrl: String, nextUrl: String) {
         itemView.movieCard.setOnClickListener {
             it.transitionName = item.posterUrl
-            itemView.moviePosterCard
-                .showAnimation(R.anim.shrink_fade_out)
-            withDelayOnMain(160) {
                 handleMovieItemClickView.handleClick(it,  previousUrl, nextUrl, item)
-            }
         }
     }
 

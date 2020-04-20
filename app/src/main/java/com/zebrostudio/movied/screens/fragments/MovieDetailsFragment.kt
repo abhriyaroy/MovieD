@@ -2,10 +2,12 @@ package com.zebrostudio.movied.screens.fragments
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.transition.ChangeBounds
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.movied.R
@@ -40,6 +42,8 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
         currentMovieItem = serializer.getObjFromString(args.movieData, MovieItemModel::class.java)
         setupTransition()
         loadPosters()
