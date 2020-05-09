@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,8 +49,11 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupBannerRecyclerView()
-        movieAdapter!!.setList(movieViewModel.moviesLiveData.value!!.moviesList)
-        bannerAdapter!!.setList(movieViewModel.moviesLiveData.value!!.moviesList)
+        movieViewModel.moviesData.observe(viewLifecycleOwner, Observer { movies ->
+            movieAdapter!!.setList(movies.moviesList)
+            bannerAdapter!!.setList(movies.moviesList)
+        })
+
     }
 
     private fun setupRecyclerView() {

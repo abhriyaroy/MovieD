@@ -24,7 +24,7 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        movieViewModel.moviesLiveData.observe(viewLifecycleOwner, Observer {
+        movieViewModel.moviesData.observe(viewLifecycleOwner, Observer {
             Navigation.findNavController(view)
                 .navigate(R.id.action_splashFragment_to_movieShowcaseFragment)
         })

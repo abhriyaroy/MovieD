@@ -1,5 +1,6 @@
 package com.zebrostudio.movied.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,12 +10,15 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel(private val movieDataRepository: MovieDataRepository) : ViewModel() {
 
-    var moviesLiveData = MutableLiveData<MoviesApiResponseModel>()
+    private var moviesLiveData = MutableLiveData<MoviesApiResponseModel>()
+    val moviesData: LiveData<MoviesApiResponseModel>
+        get() = moviesLiveData
+
 
     fun getPopularMovies() {
         viewModelScope.launch {
             movieDataRepository.getPopularMovies().let {
-                moviesLiveData.value = it.value
+                moviesLiveData.value = it
             }
         }
     }
