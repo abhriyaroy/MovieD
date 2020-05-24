@@ -1,22 +1,39 @@
 package com.zebrostudio.movied.di
 
-import com.zebrostudio.movied.repositories.MovieDataRepository
-import com.zebrostudio.movied.repositories.MovieDataRepositoryImpl
-import com.zebrostudio.movied.repositories.helpers.NetworkHelper
-import com.zebrostudio.movied.repositories.helpers.NetworkHelperImpl
-import com.zebrostudio.movied.utils.ImageLoader
-import com.zebrostudio.movied.utils.ImageLoaderImpl
-import com.zebrostudio.movied.utils.Serializer
-import com.zebrostudio.movied.viewmodels.MovieViewModel
+import com.google.gson.GsonBuilder
+import com.zebrostudio.movied.data.MovieDataRepository
+import com.zebrostudio.movied.data.MovieDataRepositoryImpl
+import com.zebrostudio.movied.data.datasource.remote.MovieService
+import com.zebrostudio.movied.data.datasource.remote.MoviesRemoteDataSource
+import com.zebrostudio.movied.data.datasource.remote.MoviesRemoteDataSourceImpl
+import com.zebrostudio.movied.util.BASE_URL
+import com.zebrostudio.movied.util.ImageLoader
+import com.zebrostudio.movied.util.ImageLoaderImpl
+import com.zebrostudio.movied.util.Serializer
+import com.zebrostudio.movied.viewmodel.MovieViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.koin.experimental.builder.single
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 val appModule: Module = module {
-    single<NetworkHelper> { NetworkHelperImpl() }
+    single<MoviesRemoteDataSource> { MoviesRemoteDataSourceImpl(get()) }
     single<MovieDataRepository> { MovieDataRepositoryImpl(get()) }
     viewModel { MovieViewModel(get()) }
     single<ImageLoader> { ImageLoaderImpl() }
     single<Serializer>()
+    single<Retrofit> {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+            .build()
+    }
+    single<MovieService> {
+        provideMovieService(get())
+    }
 }
+
+fun provideMovieService(retrofit: Retrofit): MovieService =
+    retrofit.create(MovieService::class.java)

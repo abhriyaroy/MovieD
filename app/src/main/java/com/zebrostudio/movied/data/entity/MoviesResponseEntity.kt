@@ -1,10 +1,10 @@
-package com.zebrostudio.movied.repositories.models
+package com.zebrostudio.movied.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class MoviesApiResponseModel(
+data class MoviesResponseEntity(
     @SerializedName("page")
     var page: String,
     @SerializedName("results")
-    var moviesList: List<MovieItemModel>
+    var moviesList: List<MovieEntity>
 )

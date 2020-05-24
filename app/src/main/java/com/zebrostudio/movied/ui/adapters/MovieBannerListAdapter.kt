@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.screens.adapters
+package com.zebrostudio.movied.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movied.R
-import com.zebrostudio.movied.repositories.models.MovieItemModel
-import com.zebrostudio.movied.utils.ImageLoader
+import com.zebrostudio.movied.data.entity.MovieEntity
+import com.zebrostudio.movied.util.ImageLoader
 
 class MovieBannerListAdapter(private val imageLoader: ImageLoader) :
     RecyclerView.Adapter<ViewHolderBanner>() {
 
-    private var moviesList: List<MovieItemModel> = listOf()
+    private var moviesList: List<MovieEntity> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderBanner {
         return ViewHolderBanner(
@@ -35,7 +35,7 @@ class MovieBannerListAdapter(private val imageLoader: ImageLoader) :
         }
     }
 
-    fun setList(list: List<MovieItemModel>) {
+    fun setList(list: List<MovieEntity>) {
         moviesList = list
         notifyDataSetChanged()
     }

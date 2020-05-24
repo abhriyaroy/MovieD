@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.screens.fragments
+package com.zebrostudio.movied.ui.fragments
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -16,14 +16,14 @@ import androidx.recyclerview.widget.RecyclerView.*
 import com.example.movied.R
 import com.zebrostudio.movied.circularrecyclerview.CircularHorizontalBTTMode
 import com.zebrostudio.movied.circularrecyclerview.RotateXScaleYViewMode
-import com.zebrostudio.movied.repositories.models.MovieItemModel
-import com.zebrostudio.movied.screens.adapters.MovieBannerListAdapter
-import com.zebrostudio.movied.screens.adapters.MovieListAdapter
-import com.zebrostudio.movied.utils.ImageLoader
-import com.zebrostudio.movied.utils.Serializer
-import com.zebrostudio.movied.utils.SnapHelper
-import com.zebrostudio.movied.utils.getOrientation
-import com.zebrostudio.movied.viewmodels.MovieViewModel
+import com.zebrostudio.movied.data.entity.MovieEntity
+import com.zebrostudio.movied.ui.adapters.MovieBannerListAdapter
+import com.zebrostudio.movied.ui.adapters.MovieListAdapter
+import com.zebrostudio.movied.util.ImageLoader
+import com.zebrostudio.movied.util.Serializer
+import com.zebrostudio.movied.util.SnapHelper
+import com.zebrostudio.movied.util.getOrientation
+import com.zebrostudio.movied.viewmodel.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_movie_details.view.*
 import kotlinx.android.synthetic.main.fragment_movie_showcase.*
 import org.koin.android.ext.android.inject
@@ -49,7 +49,7 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupBannerRecyclerView()
-        movieViewModel.moviesData.observe(viewLifecycleOwner, Observer { movies ->
+        movieViewModel.moviesResponseData.observe(viewLifecycleOwner, Observer { movies ->
             movieAdapter!!.setList(movies.moviesList)
             bannerAdapter!!.setList(movies.moviesList)
         })
@@ -108,7 +108,7 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
         view: View,
         previousMovieUrl: String,
         nextMovieUrl: String,
-        movieData: MovieItemModel
+        movieData: MovieEntity
     ) {
         requireView().movieTitle.transitionName = movieData.originalName
         val extras = FragmentNavigatorExtras(
@@ -132,6 +132,6 @@ interface HandleMovieItemClickView {
         view: View,
         previousMovieUrl: String,
         nextMovieUrl: String,
-        movieData: MovieItemModel
+        movieData: MovieEntity
     )
 }

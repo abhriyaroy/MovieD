@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.utils
+package com.zebrostudio.movied.util
 
 import android.view.View
 import android.view.animation.Animation

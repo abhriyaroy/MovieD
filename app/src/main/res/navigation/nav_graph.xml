@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.zebrostudio.movied.screens.fragments.SplashFragment"
+        android:name="com.zebrostudio.movied.ui.fragments.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieShowcaseFragment"
-        android:name="com.zebrostudio.movied.screens.fragments.MovieShowcaseFragment"
+        android:name="com.zebrostudio.movied.ui.fragments.MovieShowcaseFragment"
         android:label="fragment_movie_showcase"
         tools:layout="@layout/fragment_movie_showcase">
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetails"
-        android:name="com.zebrostudio.movied.screens.fragments.MovieDetailsFragment"
+        android:name="com.zebrostudio.movied.ui.fragments.MovieDetailsFragment"
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details" >
         <argument

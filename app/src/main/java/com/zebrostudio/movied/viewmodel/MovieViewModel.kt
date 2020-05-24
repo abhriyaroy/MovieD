@@ -1,17 +1,17 @@
-package com.zebrostudio.movied.viewmodels
+package com.zebrostudio.movied.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zebrostudio.movied.repositories.MovieDataRepository
-import com.zebrostudio.movied.repositories.models.MoviesApiResponseModel
+import com.zebrostudio.movied.data.MovieDataRepository
+import com.zebrostudio.movied.data.entity.MoviesResponseEntity
 import kotlinx.coroutines.launch
 
 class MovieViewModel(private val movieDataRepository: MovieDataRepository) : ViewModel() {
 
-    private var moviesLiveData = MutableLiveData<MoviesApiResponseModel>()
-    val moviesData: LiveData<MoviesApiResponseModel>
+    private var moviesLiveData = MutableLiveData<MoviesResponseEntity>()
+    val moviesResponseData: LiveData<MoviesResponseEntity>
         get() = moviesLiveData
 
 

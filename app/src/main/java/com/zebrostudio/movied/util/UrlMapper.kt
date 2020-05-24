@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.utils
+package com.zebrostudio.movied.util
 
 
 const val BASE_URL = "https://api.themoviedb.org/3/"

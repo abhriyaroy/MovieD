@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.utils
+package com.zebrostudio.movied.util
 
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView

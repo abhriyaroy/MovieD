@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.screens.adapters
+package com.zebrostudio.movied.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movied.R
-import com.zebrostudio.movied.repositories.models.MovieItemModel
-import com.zebrostudio.movied.screens.fragments.HandleMovieItemClickView
-import com.zebrostudio.movied.utils.ImageLoader
-import com.zebrostudio.movied.utils.showAnimation
-import com.zebrostudio.movied.utils.withDelayOnMain
+import com.zebrostudio.movied.data.entity.MovieEntity
+import com.zebrostudio.movied.ui.fragments.HandleMovieItemClickView
+import com.zebrostudio.movied.util.ImageLoader
 import kotlinx.android.synthetic.main.item_movie_tile.view.*
 
 class MovieListAdapter(
@@ -19,7 +17,7 @@ class MovieListAdapter(
 ) :
     RecyclerView.Adapter<ViewHolder>() {
 
-    private var moviesList: List<MovieItemModel> = listOf()
+    private var moviesList: List<MovieEntity> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -53,7 +51,7 @@ class MovieListAdapter(
         }
     }
 
-    fun setList(list: List<MovieItemModel>) {
+    fun setList(list: List<MovieEntity>) {
         moviesList = list
         notifyDataSetChanged()
     }
@@ -75,7 +73,7 @@ class ViewHolder(
         itemView.movieTitle.text = title
     }
 
-    fun attachClickListener(item: MovieItemModel, previousUrl: String, nextUrl: String) {
+    fun attachClickListener(item: MovieEntity, previousUrl: String, nextUrl: String) {
         itemView.movieCard.setOnClickListener {
             it.transitionName = item.posterUrl
                 handleMovieItemClickView.handleClick(it,  previousUrl, nextUrl, item)

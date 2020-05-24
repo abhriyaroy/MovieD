@@ -1,8 +1,7 @@
-package com.zebrostudio.movied.screens.fragments
+package com.zebrostudio.movied.ui.fragments
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.transition.ChangeBounds
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +10,11 @@ import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.movied.R
-import com.zebrostudio.movied.repositories.models.MovieItemModel
-import com.zebrostudio.movied.utils.ImageLoader
-import com.zebrostudio.movied.utils.Serializer
-import com.zebrostudio.movied.utils.getOrientation
-import com.zebrostudio.movied.utils.showAnimation
+import com.zebrostudio.movied.data.entity.MovieEntity
+import com.zebrostudio.movied.util.ImageLoader
+import com.zebrostudio.movied.util.Serializer
+import com.zebrostudio.movied.util.getOrientation
+import com.zebrostudio.movied.util.showAnimation
 import kotlinx.android.synthetic.main.fragment_movie_details.view.*
 import org.koin.android.ext.android.inject
 
@@ -27,7 +26,7 @@ class MovieDetailsFragment : Fragment() {
     private val serializer: Serializer by inject()
     private var nextMovieUrl = ""
     private var previousMovieUrl = ""
-    private lateinit var currentMovieItem: MovieItemModel
+    private lateinit var currentMovie: MovieEntity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +43,7 @@ class MovieDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
-        currentMovieItem = serializer.getObjFromString(args.movieData, MovieItemModel::class.java)
+        currentMovie = serializer.getObjFromString(args.movieData, MovieEntity::class.java)
         setupTransition()
         loadPosters()
         animatePosters()
@@ -54,8 +53,8 @@ class MovieDetailsFragment : Fragment() {
 
     private fun setupTransition() {
         with(requireView()) {
-            this.movieCard.transitionName = currentMovieItem.posterUrl
-            this.movieTitle.transitionName = currentMovieItem.originalName
+            this.movieCard.transitionName = currentMovie.posterUrl
+            this.movieTitle.transitionName = currentMovie.originalName
         }
     }
 
@@ -66,7 +65,7 @@ class MovieDetailsFragment : Fragment() {
             imageLoader.loadImage(
                 requireContext(),
                 this.mainMoviePosterCard.mainMoviePoster,
-                currentMovieItem.posterUrl
+                currentMovie.posterUrl
             )
             imageLoader.loadImage(
                 requireContext(),
@@ -99,10 +98,10 @@ class MovieDetailsFragment : Fragment() {
 
     private fun decorateDetails() {
         with(requireView()) {
-            this.movieTitle.text = currentMovieItem.originalName
-            this.movieReleaseDate.text = currentMovieItem.releaseDate
-            this.movieDescription.text = currentMovieItem.summary
-            this.movieRating.rating = (currentMovieItem.averageVote / 2).toFloat()
+            this.movieTitle.text = currentMovie.originalName
+            this.movieReleaseDate.text = currentMovie.releaseDate
+            this.movieDescription.text = currentMovie.summary
+            this.movieRating.rating = (currentMovie.averageVote / 2).toFloat()
         }
     }
 
