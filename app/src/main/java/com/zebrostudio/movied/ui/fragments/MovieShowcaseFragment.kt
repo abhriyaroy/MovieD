@@ -24,6 +24,7 @@ import com.zebrostudio.movied.util.Serializer
 import com.zebrostudio.movied.util.SnapHelper
 import com.zebrostudio.movied.util.getOrientation
 import com.zebrostudio.movied.viewmodel.MovieViewModel
+import com.zebrostudio.movied.viewmodel.Status
 import kotlinx.android.synthetic.main.fragment_movie_details.view.*
 import kotlinx.android.synthetic.main.fragment_movie_showcase.*
 import org.koin.android.ext.android.inject
@@ -50,10 +51,11 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
         setupRecyclerView()
         setupBannerRecyclerView()
         movieViewModel.moviesResponseData.observe(viewLifecycleOwner, Observer { movies ->
-            movieAdapter!!.setList(movies.moviesList)
-            bannerAdapter!!.setList(movies.moviesList)
+            if (movies.status == Status.SUCCESS) {
+                movieAdapter!!.setList(movies.data!!.moviesList)
+                bannerAdapter!!.setList(movies.data.moviesList)
+            }
         })
-
     }
 
     private fun setupRecyclerView() {

@@ -6,24 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zebrostudio.movied.data.MovieDataRepository
 import com.zebrostudio.movied.data.entity.MoviesResponseEntity
-import com.zebrostudio.movied.viewmodel.Status.SUCCESS
 import kotlinx.coroutines.launch
 
 class MovieViewModel(private val movieDataRepository: MovieDataRepository) : ViewModel() {
 
-    private var moviesLiveData = MutableLiveData<Result<MoviesResponseEntity>>()
-    val moviesResponseData: LiveData<Result<MoviesResponseEntity>>
+    private var moviesLiveData = MutableLiveData<ResourceResult<MoviesResponseEntity>>()
+    val moviesResponseData: LiveData<ResourceResult<MoviesResponseEntity>>
         get() = moviesLiveData
 
-    init {
-        moviesLiveData.value = Result.loading()
-    }
-
-
     fun getPopularMovies() {
+        moviesLiveData.value = ResourceResult.loading()
         viewModelScope.launch {
             movieDataRepository.getPopularMovies().let {
-                moviesLiveData.value = Result.success(it)
+                moviesLiveData.value = it.value
             }
         }
     }

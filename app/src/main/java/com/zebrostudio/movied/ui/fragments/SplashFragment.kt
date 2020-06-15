@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.movied.R
 import com.zebrostudio.movied.viewmodel.MovieViewModel
+import com.zebrostudio.movied.viewmodel.Status
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SplashFragment : Fragment() {
@@ -25,8 +26,14 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         movieViewModel.moviesResponseData.observe(viewLifecycleOwner, Observer {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_splashFragment_to_movieShowcaseFragment)
+            when (it.status) {
+                Status.LOADING -> {
+                }
+                Status.SUCCESS -> Navigation.findNavController(view)
+                    .navigate(R.id.action_splashFragment_to_movieShowcaseFragment)
+                Status.ERROR -> {
+                }
+            }
         })
         movieViewModel.getPopularMovies()
     }
