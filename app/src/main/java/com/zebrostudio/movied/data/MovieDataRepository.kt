@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.zebrostudio.movied.data.datasource.remote.MoviesRemoteDataSource
 import com.zebrostudio.movied.data.entity.MoviesResponseEntity
 import com.zebrostudio.movied.viewmodel.ResourceResult
+import java.lang.Exception
 
 
 interface MovieDataRepository {
@@ -16,15 +17,20 @@ class MovieDataRepositoryImpl(private val moviesRemoteDataSource: MoviesRemoteDa
 
     override suspend fun getPopularMovies(): LiveData<ResourceResult<MoviesResponseEntity>> {
         return MutableLiveData<ResourceResult<MoviesResponseEntity>>().let { mutableLiveData ->
-            with(moviesRemoteDataSource.getPopularMovies()) {
-                if (isSuccessful) {
-                    mutableLiveData.value = ResourceResult.success(body()!!)
-                } else {
-                    mutableLiveData.value =
-                        ResourceResult.error(errorBody()!!.string())
+            try {
+                with(moviesRemoteDataSource.getPopularMovies()) {
+                    if (isSuccessful) {
+                        mutableLiveData.value = ResourceResult.success(body()!!)
+                    } else {
+                        mutableLiveData.value =
+                            ResourceResult.error(errorBody().toString())
+                    }
                 }
-                mutableLiveData
+            } catch (e : Exception){
+                e.printStackTrace()
+                mutableLiveData.value = ResourceResult.error(e.message)
             }
+            mutableLiveData
         }
     }
 }

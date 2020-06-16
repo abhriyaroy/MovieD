@@ -45,7 +45,7 @@
             app:argType="string"
             android:defaultValue='""' />
         <argument
-            android:name="nesxtMovieUrl"
+            android:name="nextMovieUrl"
             android:defaultValue='""' />
         <argument android:name="movieData"
             app:argType="string"

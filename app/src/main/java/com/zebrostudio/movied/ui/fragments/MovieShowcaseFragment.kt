@@ -48,62 +48,9 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-        setupBannerRecyclerView()
-        movieViewModel.moviesResponseData.observe(viewLifecycleOwner, Observer { movies ->
-            if (movies.status == Status.SUCCESS) {
-                movieAdapter!!.setList(movies.data!!.moviesList)
-                bannerAdapter!!.setList(movies.data.moviesList)
-            }
-        })
-    }
-
-    private fun setupRecyclerView() {
-        recyclerView.layoutManager =
-            if (requireContext().getOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
-                recyclerView.setViewMode(RotateXScaleYViewMode())
-                LinearLayoutManager(context, VERTICAL, false)
-            } else {
-                recyclerView.setViewMode(CircularHorizontalBTTMode(0f, true))
-                LinearLayoutManager(context, HORIZONTAL, false)
-            }
-        movieAdapter = MovieListAdapter(imageLoader, this)
-        recyclerView.adapter = movieAdapter
-        recyclerView.setHasFixedSize(true)
-        movieSnapHelper = SnapHelper()
-        movieSnapHelper.attachToRecyclerView(recyclerView)
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (requireContext().getOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
-                    bannerRecyclerView.scrollBy(0, -dy)
-                } else {
-                    bannerRecyclerView.scrollBy(-dx, 0)
-                }
-            }
-        })
-
-    }
-
-    private fun setupBannerRecyclerView() {
-        bannerRecyclerView.layoutManager =
-            if (requireContext().getOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
-                LinearLayoutManager(requireActivity(), VERTICAL, true)
-            } else {
-                LinearLayoutManager(requireActivity(), HORIZONTAL, true)
-            }
-
-        bannerAdapter = MovieBannerListAdapter(imageLoader)
-        bannerRecyclerView.adapter = bannerAdapter
-        bannerRecyclerView.setHasFixedSize(true)
-        bannerRecyclerView.addOnItemTouchListener(object : SimpleOnItemTouchListener() {
-            override fun onInterceptTouchEvent(
-                rv: RecyclerView,
-                e: MotionEvent
-            ): Boolean {
-                return true
-            }
-        })
+        setupForegroundRecyclerView()
+        setupBackgroundRecyclerView()
+        observeMovieData()
     }
 
     override fun handleClick(
@@ -113,19 +60,100 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
         movieData: MovieEntity
     ) {
         requireView().movieTitle.transitionName = movieData.originalName
-        val extras = FragmentNavigatorExtras(
-            view to movieData.posterUrl,
-            requireView().movieTitle to movieData.originalName
-        )
-        val action =
-            MovieShowcaseFragmentDirections.actionMovieShowcaseFragmentToMovieDetails(
-                previousMovieUrl = previousMovieUrl,
-                nesxtMovieUrl = nextMovieUrl,
-                movieData = serializer.getStringFromObj(movieData)
-            )
-
+        val extras = getNavigationExtras(view, movieData)
+        val action = getNavigationAction(previousMovieUrl, nextMovieUrl, movieData)
         requireView().findNavController().navigate(action, extras)
     }
+
+    private fun setupForegroundRecyclerView() {
+        foregroundRecyclerView.layoutManager = getLayoutManagerForForegroundRecyclerView()
+        setForegroundRecyclerViewMode()
+        movieAdapter = MovieListAdapter(imageLoader, this)
+        foregroundRecyclerView.adapter = movieAdapter
+        foregroundRecyclerView.setHasFixedSize(true)
+        movieSnapHelper = SnapHelper()
+        movieSnapHelper.attachToRecyclerView(foregroundRecyclerView)
+    }
+
+    private fun getLayoutManagerForForegroundRecyclerView() =
+        if (requireContext().getOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
+            LinearLayoutManager(context, VERTICAL, false)
+        } else {
+            LinearLayoutManager(context, HORIZONTAL, false)
+        }
+
+    private fun setForegroundRecyclerViewMode() {
+        if (requireContext().getOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
+            foregroundRecyclerView.setViewMode(RotateXScaleYViewMode())
+        } else {
+            foregroundRecyclerView.setViewMode(CircularHorizontalBTTMode(0f, true))
+        }
+    }
+
+    private fun setupBackgroundRecyclerView() {
+        backgroundRecyclerView.layoutManager = getLayoutManagerForBackgroundRecyclerView()
+        bannerAdapter = MovieBannerListAdapter(imageLoader)
+        backgroundRecyclerView.adapter = bannerAdapter
+        backgroundRecyclerView.setHasFixedSize(true)
+        addBackgroundRecyclerViewTouchListener()
+        scrollBackgroundRecyclerViewOnForegroundRecyclerViewScroll()
+    }
+
+    private fun getLayoutManagerForBackgroundRecyclerView() =
+        if (requireContext().getOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
+            LinearLayoutManager(requireActivity(), VERTICAL, true)
+        } else {
+            LinearLayoutManager(requireActivity(), HORIZONTAL, true)
+        }
+
+    private fun addBackgroundRecyclerViewTouchListener() {
+        backgroundRecyclerView.addOnItemTouchListener(object : SimpleOnItemTouchListener() {
+            override fun onInterceptTouchEvent(
+                rv: RecyclerView,
+                e: MotionEvent
+            ): Boolean {
+                return true
+            }
+        })
+    }
+
+    private fun scrollBackgroundRecyclerViewOnForegroundRecyclerViewScroll() {
+        foregroundRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (requireContext().getOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
+                    backgroundRecyclerView.scrollBy(0, -dy)
+                } else {
+                    backgroundRecyclerView.scrollBy(-dx, 0)
+                }
+            }
+        })
+    }
+
+    private fun observeMovieData() {
+        movieViewModel.moviesResponseData.observe(viewLifecycleOwner, Observer { movies ->
+            if (movies.status == Status.SUCCESS) {
+                println(movies.data!!.moviesList)
+                movieAdapter!!.setList(movies.data!!.moviesList)
+                bannerAdapter!!.setList(movies.data.moviesList)
+            }
+        })
+    }
+
+    private fun getNavigationExtras(view: View, movieData: MovieEntity) = FragmentNavigatorExtras(
+        view to movieData.posterUrl,
+        requireView().movieTitle to movieData.originalName
+    )
+
+    private fun getNavigationAction(
+        previousMovieUrl: String,
+        nextMovieUrl: String,
+        movieData: MovieEntity
+    ) = MovieShowcaseFragmentDirections.actionMovieShowcaseFragmentToMovieDetails(
+        previousMovieUrl = previousMovieUrl,
+        nextMovieUrl = nextMovieUrl,
+        movieData = serializer.getStringFromObj(movieData)
+    )
 
 }
 

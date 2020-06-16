@@ -8,7 +8,7 @@ data class ResourceResult<out T>(val status: Status, val data: T?, val message: 
             return ResourceResult(SUCCESS, data, null)
         }
 
-        fun <T> error(msg: String): ResourceResult<T> {
+        fun <T> error(msg: String?): ResourceResult<T> {
             return ResourceResult(ERROR, null, msg)
         }
 

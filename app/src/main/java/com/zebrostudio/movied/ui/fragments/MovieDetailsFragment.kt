@@ -32,10 +32,7 @@ class MovieDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        sharedElementReturnTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        configureSharedElementTransition()
         return inflater.inflate(R.layout.fragment_movie_details, container, false)
     }
 
@@ -51,6 +48,13 @@ class MovieDetailsFragment : Fragment() {
         animateDetails()
     }
 
+    private fun configureSharedElementTransition() {
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
+
     private fun setupTransition() {
         with(requireView()) {
             this.movieCard.transitionName = currentMovie.posterUrl
@@ -60,24 +64,10 @@ class MovieDetailsFragment : Fragment() {
 
     private fun loadPosters() {
         previousMovieUrl = args.previousMovieUrl
-        nextMovieUrl = args.nesxtMovieUrl
-        with(requireView()) {
-            imageLoader.loadImage(
-                requireContext(),
-                this.mainMoviePosterCard.mainMoviePoster,
-                currentMovie.posterUrl
-            )
-            imageLoader.loadImage(
-                requireContext(),
-                this.previousMoviePosterCard.previousMoviePoster,
-                previousMovieUrl
-            )
-            imageLoader.loadImage(
-                requireContext(),
-                this.successorMoviePosterCard.successorMoviePoster,
-                nextMovieUrl
-            )
-        }
+        nextMovieUrl = args.nextMovieUrl
+        loadPosterImage()
+        loadPreviousPosterImage()
+        loadNextPosterImage()
     }
 
     private fun animatePosters() {
@@ -110,6 +100,36 @@ class MovieDetailsFragment : Fragment() {
             this.movieReleaseDate.showAnimation(R.anim.slide_up_fade_in)
             this.movieDescription.showAnimation(R.anim.slide_up_fade_in)
             this.movieRating.showAnimation(R.anim.slide_up_fade_in)
+        }
+    }
+
+    private fun loadPosterImage() {
+        with(requireView()) {
+            imageLoader.loadImage(
+                requireContext(),
+                this.mainMoviePosterCard.mainMoviePoster,
+                currentMovie.posterUrl
+            )
+        }
+    }
+
+    private fun loadPreviousPosterImage() {
+        with(requireView()) {
+            imageLoader.loadImage(
+                requireContext(),
+                this.previousMoviePosterCard.previousMoviePoster,
+                previousMovieUrl
+            )
+        }
+    }
+
+    private fun loadNextPosterImage() {
+        with(requireView()) {
+            imageLoader.loadImage(
+                requireContext(),
+                this.successorMoviePosterCard.successorMoviePoster,
+                nextMovieUrl
+            )
         }
     }
 

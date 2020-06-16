@@ -8,9 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.movied.R
+import com.google.android.material.snackbar.Snackbar
 import com.zebrostudio.movied.viewmodel.MovieViewModel
 import com.zebrostudio.movied.viewmodel.Status
+import kotlinx.android.synthetic.main.fragment_splash.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
 
 class SplashFragment : Fragment() {
 
@@ -25,17 +28,31 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeMovieData(view)
+        movieViewModel.getPopularMovies()
+    }
+
+    private fun observeMovieData(view: View) {
         movieViewModel.moviesResponseData.observe(viewLifecycleOwner, Observer {
             when (it.status) {
-                Status.LOADING -> {
-                }
-                Status.SUCCESS -> Navigation.findNavController(view)
-                    .navigate(R.id.action_splashFragment_to_movieShowcaseFragment)
-                Status.ERROR -> {
-                }
+                Status.LOADING -> lottieSplash.playAnimation()
+                Status.SUCCESS -> showMovieShowcaseScreen(view)
+                Status.ERROR -> showMovieLoadingErrorMessageWithRetryButton()
             }
         })
-        movieViewModel.getPopularMovies()
+    }
+
+    private fun showMovieShowcaseScreen(view: View) {
+        Navigation.findNavController(view)
+            .navigate(R.id.action_splashFragment_to_movieShowcaseFragment)
+    }
+
+    private fun showMovieLoadingErrorMessageWithRetryButton() {
+        Snackbar.make(coordinatorSplash, R.string.failed_to_load_movies, Snackbar.LENGTH_INDEFINITE)
+            .apply {
+                setAction(R.string.retry) { movieViewModel.getPopularMovies() }
+                show()
+            }
     }
 
 }

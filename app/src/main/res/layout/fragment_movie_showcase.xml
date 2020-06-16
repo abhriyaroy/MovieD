@@ -6,13 +6,13 @@
     tools:context="com.zebrostudio.movied.ui.fragments.MovieShowcaseFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bannerRecyclerView"
+        android:id="@+id/backgroundRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal" />
 
     <com.zebrostudio.movied.circularrecyclerview.CircleRecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/foregroundRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
