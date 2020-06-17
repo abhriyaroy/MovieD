@@ -3,20 +3,20 @@ package com.zebrostudio.movied.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.zebrostudio.movied.data.datasource.remote.MoviesRemoteDataSource
-import com.zebrostudio.movied.data.entity.MoviesResponseEntity
+import com.zebrostudio.movied.data.entity.MoviesResultEntity
 import com.zebrostudio.movied.viewmodel.ResourceResult
 import java.net.UnknownHostException
 
 
 interface MovieDataRepository {
-    suspend fun getPopularMovies(): LiveData<ResourceResult<MoviesResponseEntity>>
+    suspend fun getPopularMovies(): LiveData<ResourceResult<MoviesResultEntity>>
 }
 
 class MovieDataRepositoryImpl(private val moviesRemoteDataSource: MoviesRemoteDataSource) :
     MovieDataRepository {
 
-    override suspend fun getPopularMovies(): LiveData<ResourceResult<MoviesResponseEntity>> {
-        return MutableLiveData<ResourceResult<MoviesResponseEntity>>().let { mutableLiveData ->
+    override suspend fun getPopularMovies(): LiveData<ResourceResult<MoviesResultEntity>> {
+        return MutableLiveData<ResourceResult<MoviesResultEntity>>().let { mutableLiveData ->
             try {
                 with(moviesRemoteDataSource.getPopularMovies()) {
                     if (isSuccessful) {

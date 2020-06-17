@@ -33,7 +33,7 @@ class SplashFragment : Fragment() {
     }
 
     private fun observeMovieData(view: View) {
-        movieViewModel.moviesResponseData.observe(viewLifecycleOwner, Observer {
+        movieViewModel.moviesResultData.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Status.LOADING -> lottieSplash.playAnimation()
                 Status.SUCCESS -> showMovieShowcaseScreen(view)

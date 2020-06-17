@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zebrostudio.movied.data.MovieDataRepository
-import com.zebrostudio.movied.data.entity.MoviesResponseEntity
+import com.zebrostudio.movied.data.entity.MoviesResultEntity
 import kotlinx.coroutines.launch
 
 class MovieViewModel(private val movieDataRepository: MovieDataRepository) : ViewModel() {
 
-    private var moviesLiveData = MutableLiveData<ResourceResult<MoviesResponseEntity>>()
-    val moviesResponseData: LiveData<ResourceResult<MoviesResponseEntity>>
+    private var moviesLiveData = MutableLiveData<ResourceResult<MoviesResultEntity>>()
+    val moviesResultData: LiveData<ResourceResult<MoviesResultEntity>>
         get() = moviesLiveData
 
     fun getPopularMovies() {

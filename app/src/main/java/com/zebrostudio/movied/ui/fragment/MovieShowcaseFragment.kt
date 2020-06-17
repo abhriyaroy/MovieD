@@ -131,7 +131,7 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
     }
 
     private fun observeMovieData() {
-        movieViewModel.moviesResponseData.observe(viewLifecycleOwner, Observer { movies ->
+        movieViewModel.moviesResultData.observe(viewLifecycleOwner, Observer { movies ->
             if (movies.status == Status.SUCCESS) {
                 println(movies.data!!.moviesList)
                 movieAdapter!!.setList(movies.data!!.moviesList)

@@ -2,7 +2,7 @@ package com.zebrostudio.movied.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class MoviesResponseEntity(
+data class MoviesResultEntity(
     @SerializedName("page")
     var page: String,
     @SerializedName("results")
