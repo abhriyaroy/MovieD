@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.ui.adapters
+package com.zebrostudio.movied.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

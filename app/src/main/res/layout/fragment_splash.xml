@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.zebrostudio.movied.ui.fragments.SplashFragment">
+        tools:context="com.zebrostudio.movied.ui.fragment.SplashFragment">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieSplash"

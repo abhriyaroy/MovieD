@@ -6,6 +6,7 @@ import com.zebrostudio.movied.data.datasource.remote.MoviesRemoteDataSource
 import com.zebrostudio.movied.data.entity.MoviesResponseEntity
 import com.zebrostudio.movied.viewmodel.ResourceResult
 import java.lang.Exception
+import java.net.UnknownHostException
 
 
 interface MovieDataRepository {
@@ -26,7 +27,7 @@ class MovieDataRepositoryImpl(private val moviesRemoteDataSource: MoviesRemoteDa
                             ResourceResult.error(errorBody().toString())
                     }
                 }
-            } catch (e : Exception){
+            } catch (e : UnknownHostException){
                 e.printStackTrace()
                 mutableLiveData.value = ResourceResult.error(e.message)
             }

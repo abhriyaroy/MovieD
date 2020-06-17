@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.ui.fragments
+package com.zebrostudio.movied.ui.fragment
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.example.movied.R
 import com.zebrostudio.movied.data.entity.MovieEntity
-import com.zebrostudio.movied.ui.adapters.MovieBannerListAdapter
-import com.zebrostudio.movied.ui.adapters.MovieListAdapter
+import com.zebrostudio.movied.ui.adapter.MovieBannerListAdapter
+import com.zebrostudio.movied.ui.adapter.MovieListAdapter
 import com.zebrostudio.movied.util.ImageLoader
 import com.zebrostudio.movied.util.Serializer
 import com.zebrostudio.movied.util.SnapHelper

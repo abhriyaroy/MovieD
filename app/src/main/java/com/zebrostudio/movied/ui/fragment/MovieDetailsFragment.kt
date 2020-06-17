@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.ui.fragments
+package com.zebrostudio.movied.ui.fragment
 
 import android.content.res.Configuration
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.ui.adapters
+package com.zebrostudio.movied.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movied.R
 import com.zebrostudio.movied.data.entity.MovieEntity
-import com.zebrostudio.movied.ui.fragments.HandleMovieItemClickView
+import com.zebrostudio.movied.ui.fragment.HandleMovieItemClickView
 import com.zebrostudio.movied.util.ImageLoader
 import kotlinx.android.synthetic.main.item_movie_tile.view.*
 
