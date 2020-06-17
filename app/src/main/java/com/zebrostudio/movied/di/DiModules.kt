@@ -18,11 +18,9 @@ import org.koin.experimental.builder.single
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val appModule: Module = module {
+val dataModule: Module = module {
     single<MoviesRemoteDataSource> { MoviesRemoteDataSourceImpl(get()) }
     single<MovieDataRepository> { MovieDataRepositoryImpl(get()) }
-    viewModel { MovieViewModel(get()) }
-    single<ImageLoader> { ImageLoaderImpl() }
     single<Serializer>()
     single<Retrofit> {
         Retrofit.Builder()
@@ -33,6 +31,14 @@ val appModule: Module = module {
     single<MovieService> {
         provideMovieService(get())
     }
+}
+
+val viewModelModule : Module = module {
+    viewModel { MovieViewModel(get()) }
+}
+
+val uiModule : Module = module {
+    single<ImageLoader> { ImageLoaderImpl() }
 }
 
 fun provideMovieService(retrofit: Retrofit): MovieService =
