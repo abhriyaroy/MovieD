@@ -53,11 +53,4 @@ deps.rating_view = "me.zhanghai.android.materialratingbar:library:$RATING_VIEW_V
 
 deps.circular_recycler_view = project(':circularRecyclerView')
 
-def junit = [:]
-junit.core = "junit:junit:$JUNIT_VERSION"
-junit.ext = "androidx.test.ext:junit:$JUNIT_EXTENSION_VERSION"
-deps.junit = junit
-
-deps.espresso = "androidx.test.espresso:espresso-core:$ESPRESSO_CORE_VERSION"
-
 ext.deps = deps

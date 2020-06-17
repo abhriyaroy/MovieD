@@ -39,11 +39,3 @@ ext.APP_MODULE_DEPENDENCIES = {
         implementation deps.circular_recycler_view
     }
 }
-
-ext.APP_MODULE_TEST_DEPENDENCIES = {
-    dependencies {
-        testImplementation deps.junit.core
-        androidTestImplementation deps.junit.ext
-        androidTestImplementation deps.espresso
-    }
-}

@@ -33,11 +33,11 @@ val dataModule: Module = module {
     }
 }
 
-val viewModelModule : Module = module {
+val viewModelModule: Module = module {
     viewModel { MovieViewModel(get()) }
 }
 
-val uiModule : Module = module {
+val uiModule: Module = module {
     single<ImageLoader> { ImageLoaderImpl() }
 }
 

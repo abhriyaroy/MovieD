@@ -18,7 +18,7 @@ private class AnimationListener(
 fun View.showAnimation(
     @AnimRes animResId: Int,
     fillAfter: Boolean = true,
-    delay : Long = 0,
+    delay: Long = 0,
     onAnimationRepeat: () -> Unit = {},
     onAnimationStart: () -> Unit = {},
     onAnimationEnd: () -> Unit = {}

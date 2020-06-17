@@ -76,7 +76,7 @@ class ViewHolder(
     fun attachClickListener(item: MovieEntity, previousUrl: String, nextUrl: String) {
         itemView.movieCard.setOnClickListener {
             it.transitionName = item.posterUrl
-                handleMovieItemClickView.handleClick(it,  previousUrl, nextUrl, item)
+            handleMovieItemClickView.handleClick(it, previousUrl, nextUrl, item)
         }
     }
 
