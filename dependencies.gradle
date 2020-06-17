@@ -1,0 +1,63 @@
+apply from: '../versions.gradle'
+
+ext.deps = [:]
+
+def deps = [:]
+
+deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+
+deps.androidx_appcompat = "androidx.appcompat:appcompat:$APP_COMPAT_VERSION"
+
+deps.core_ktx = "androidx.core:core-ktx:$KTX_VERSION"
+
+deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
+
+def coroutine = [:]
+coroutine.core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE_VERSION"
+coroutine.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINE_VERSION"
+deps.coroutine = coroutine
+
+def koin = [:]
+koin.android = "org.koin:koin-android:$KOIN_VERSION"
+koin.viewmodel = "org.koin:koin-androidx-viewmodel:$KOIN_VERSION"
+koin.fragment = "org.koin:koin-androidx-fragment:$KOIN_VERSION"
+koin.ext = "org.koin:koin-androidx-ext:$KOIN_VERSION"
+deps.koin = koin
+
+def navigation_component = [:]
+navigation_component.fragment = "androidx.navigation:navigation-fragment:$NAVIGATION_FRAGMENT_VERSION"
+navigation_component.fragment_ktx ="androidx.navigation:navigation-fragment-ktx:$NAVIGATION_FRAGMENT_VERSION"
+navigation_component.ui = "androidx.navigation:navigation-ui:$NAVIGATION_UI_VERSION"
+navigation_component.ui_ktx = "androidx.navigation:navigation-ui-ktx:$NAVIGATION_UI_VERSION"
+deps.navigation_component = navigation_component
+
+def retrofit = [:]
+retrofit.core = "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+retrofit.gson_converter = "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+deps.retrofit = retrofit
+
+deps.lottie = "com.airbnb.android:lottie:$LOTTIE_VERSION"
+
+def lifecycle_component = [:]
+lifecycle_component.extension = "android.arch.lifecycle:extensions:$LIFECYCLE_VERSION"
+lifecycle_component.compiler = "android.arch.lifecycle:compiler:$LIFECYCLE_VERSION"
+deps.lifecycle_component = lifecycle_component
+
+deps.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$VIEWMODEL_VERSION"
+
+deps.recyclerview = "androidx.recyclerview:recyclerview:$RECYCLER_VIEW_VERSION"
+
+deps.glide = "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+
+deps.rating_view = "me.zhanghai.android.materialratingbar:library:$RATING_VIEW_VERSION"
+
+deps.circular_recycler_view = project(':circularRecyclerView')
+
+def junit = [:]
+junit.core = "junit:junit:$JUNIT_VERSION"
+junit.ext = "androidx.test.ext:junit:$JUNIT_EXTENSION_VERSION"
+deps.junit = junit
+
+deps.espresso = "androidx.test.espresso:espresso-core:$ESPRESSO_CORE_VERSION"
+
+ext.deps = deps

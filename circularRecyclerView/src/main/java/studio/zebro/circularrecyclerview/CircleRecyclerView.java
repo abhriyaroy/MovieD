@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.circularrecyclerview;
+package studio.zebro.circularrecyclerview;
 
 import android.content.Context;
 import android.os.Handler;
@@ -12,10 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.movied.R;
 
 import java.lang.ref.WeakReference;
-
 
 public class CircleRecyclerView extends RecyclerView implements View.OnClickListener {
 

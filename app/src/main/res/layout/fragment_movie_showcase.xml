@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal" />
 
-    <com.zebrostudio.movied.circularrecyclerview.CircleRecyclerView
+    <studio.zebro.circularrecyclerview.CircleRecyclerView
         android:id="@+id/foregroundRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

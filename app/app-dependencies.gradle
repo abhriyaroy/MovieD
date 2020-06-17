@@ -1,0 +1,49 @@
+apply from: '../dependencies.gradle'
+
+ext.APP_MODULE_DEPENDENCIES = {
+    dependencies {
+        implementation deps.kotlin
+        implementation deps.androidx_appcompat
+        implementation deps.core_ktx
+        implementation deps.constraint_layout
+        // Coroutine
+        implementation deps.coroutine.core
+        implementation deps.coroutine.android
+        // Koin for Android
+        implementation deps.koin.android
+        implementation deps.koin.viewmodel
+        implementation deps.koin.fragment
+        implementation deps.koin.ext
+        // Navigation component
+        implementation deps.navigation_component.fragment
+        implementation deps.navigation_component.fragment_ktx
+        implementation deps.navigation_component.ui
+        implementation deps.navigation_component.ui_ktx
+        // Retrofit
+        implementation deps.retrofit.core
+        implementation deps.retrofit.gson_converter
+        // Lottie
+        implementation deps.lottie
+        // Lifecycle components
+        implementation deps.lifecycle_component.extension
+        kapt deps.lifecycle_component.compiler
+        // Viewmodel
+        implementation deps.viewmodel
+        // Recyclerview
+        implementation deps.recyclerview
+        // Glide
+        implementation deps.glide
+        // RatingView
+        implementation deps.rating_view
+
+        implementation deps.circular_recycler_view
+    }
+}
+
+ext.APP_MODULE_TEST_DEPENDENCIES = {
+    dependencies {
+        testImplementation deps.junit.core
+        androidTestImplementation deps.junit.ext
+        androidTestImplementation deps.espresso
+    }
+}

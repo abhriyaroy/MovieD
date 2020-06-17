@@ -1,0 +1,11 @@
+apply from: '../dependencies.gradle'
+
+ext.CIRCULAR_RECYCLER_VIEW_DEPENDENCIES = {
+    dependencies{
+        implementation deps.kotlin
+        implementation deps.androidx_appcompat
+        implementation deps.core_ktx
+        // Recyclerview
+        implementation deps.recyclerview
+    }
+}

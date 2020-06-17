@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.example.movied.R
-import com.zebrostudio.movied.circularrecyclerview.CircularHorizontalBTTMode
-import com.zebrostudio.movied.circularrecyclerview.RotateXScaleYViewMode
 import com.zebrostudio.movied.data.entity.MovieEntity
 import com.zebrostudio.movied.ui.adapters.MovieBannerListAdapter
 import com.zebrostudio.movied.ui.adapters.MovieListAdapter
@@ -29,6 +27,8 @@ import kotlinx.android.synthetic.main.fragment_movie_details.view.*
 import kotlinx.android.synthetic.main.fragment_movie_showcase.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import studio.zebro.circularrecyclerview.CircularHorizontalBTTMode
+import studio.zebro.circularrecyclerview.RotateXScaleYViewMode
 
 class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
 

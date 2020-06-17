@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.circularrecyclerview;
+package studio.zebro.circularrecyclerview;
 
 import android.view.View;
 
