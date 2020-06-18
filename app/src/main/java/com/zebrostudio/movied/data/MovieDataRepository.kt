@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.zebrostudio.movied.data.datasource.remote.MoviesRemoteDataSource
 import com.zebrostudio.movied.data.entity.MoviesResultEntity
+import com.zebrostudio.movied.exception.MovieFetchException
+import com.zebrostudio.movied.exception.NoInternetException
 import com.zebrostudio.movied.viewmodel.ResourceResult
 import java.net.UnknownHostException
 
@@ -23,12 +25,11 @@ class MovieDataRepositoryImpl(private val moviesRemoteDataSource: MoviesRemoteDa
                         mutableLiveData.value = ResourceResult.success(body()!!)
                     } else {
                         mutableLiveData.value =
-                            ResourceResult.error(errorBody().toString())
+                            ResourceResult.error(MovieFetchException())
                     }
                 }
             } catch (e: UnknownHostException) {
-                e.printStackTrace()
-                mutableLiveData.value = ResourceResult.error(e.message)
+                mutableLiveData.value = ResourceResult.error(NoInternetException())
             }
             mutableLiveData
         }

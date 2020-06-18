@@ -1,3 +1,6 @@
 package com.zebrostudio.movied.exception
 
-class MovieFetchException(private val errorMessage: String?) : Exception(errorMessage)
+
+private const val movieFetchExceptionMessage = "Something went wrong while fetching movies"
+
+class MovieFetchException() : Exception(movieFetchExceptionMessage)

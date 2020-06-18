@@ -18,7 +18,6 @@ class MovieViewModel(private val movieDataRepository: MovieDataRepository) : Vie
         moviesLiveData.value = ResourceResult.loading()
         viewModelScope.launch {
             movieDataRepository.getPopularMovies().let {
-                print("result is ${it.value}")
                 moviesLiveData.value = it.value
             }
         }

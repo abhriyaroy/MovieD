@@ -2,6 +2,7 @@ package com.zebrostudio.movied
 
 import android.app.Application
 import com.zebrostudio.movied.di.dataModule
+import com.zebrostudio.movied.di.networkModule
 import com.zebrostudio.movied.di.uiModule
 import com.zebrostudio.movied.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -15,7 +16,7 @@ class MoviedApplication : Application() {
     }
 
     private fun initKoin() {
-        val moduleList = listOf(dataModule, viewModelModule, uiModule)
+        val moduleList = listOf(dataModule, networkModule, viewModelModule, uiModule)
         startKoin {
             androidContext(this@MoviedApplication)
             modules(moduleList)

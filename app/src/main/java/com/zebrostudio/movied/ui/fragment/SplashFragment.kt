@@ -9,7 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.movied.R
 import com.google.android.material.snackbar.Snackbar
+import com.zebrostudio.movied.data.entity.MoviesResultEntity
+import com.zebrostudio.movied.exception.NoInternetException
+import com.zebrostudio.movied.exception.noInternetExceptionMessage
 import com.zebrostudio.movied.viewmodel.MovieViewModel
+import com.zebrostudio.movied.viewmodel.ResourceResult
 import com.zebrostudio.movied.viewmodel.Status
 import kotlinx.android.synthetic.main.fragment_splash.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -37,7 +41,7 @@ class SplashFragment : Fragment() {
             when (it.status) {
                 Status.LOADING -> lottieSplash.playAnimation()
                 Status.SUCCESS -> showMovieShowcaseScreen(view)
-                Status.ERROR -> showMovieLoadingErrorMessageWithRetryButton()
+                Status.ERROR -> handleErrorState(it)
             }
         })
     }
@@ -47,12 +51,24 @@ class SplashFragment : Fragment() {
             .navigate(R.id.action_splashFragment_to_movieShowcaseFragment)
     }
 
+    private fun handleErrorState(result: ResourceResult<MoviesResultEntity>) {
+        if (result.error is NoInternetException){
+            showMovieLoadingErrorMessageWithRetryButton()
+        } else {
+            showGenericError()
+        }
+    }
+
     private fun showMovieLoadingErrorMessageWithRetryButton() {
         Snackbar.make(coordinatorSplash, R.string.failed_to_load_movies, Snackbar.LENGTH_INDEFINITE)
             .apply {
                 setAction(R.string.retry) { movieViewModel.getPopularMovies() }
                 show()
             }
+    }
+
+    private fun showGenericError() {
+        Snackbar.make(coordinatorSplash, R.string.something_went_wrong, Snackbar.LENGTH_INDEFINITE)
     }
 
 }

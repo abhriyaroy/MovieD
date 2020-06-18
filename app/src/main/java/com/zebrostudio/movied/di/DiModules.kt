@@ -22,6 +22,9 @@ val dataModule: Module = module {
     single<MoviesRemoteDataSource> { MoviesRemoteDataSourceImpl(get()) }
     single<MovieDataRepository> { MovieDataRepositoryImpl(get()) }
     single<Serializer>()
+}
+
+val networkModule : Module = module {
     single<Retrofit> {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
