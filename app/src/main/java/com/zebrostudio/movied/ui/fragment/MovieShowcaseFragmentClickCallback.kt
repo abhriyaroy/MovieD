@@ -61,7 +61,7 @@ class MovieShowcaseFragmentClickCallback : Fragment(), MovieItemClickCallback {
     ) {
         requireView().movieTitle.transitionName = movieDetailArgumentSet.selectedMovieItem.originalName
         requireView().findNavController().navigate(
-            getNavigationAction(movieDetailArgumentSet),
+            getNavigationDirection(movieDetailArgumentSet),
             getNavigationExtras(view, movieDetailArgumentSet.selectedMovieItem)
         )
     }
@@ -145,7 +145,7 @@ class MovieShowcaseFragmentClickCallback : Fragment(), MovieItemClickCallback {
         requireView().movieTitle to movieData.originalName
     )
 
-    private fun getNavigationAction(
+    private fun getNavigationDirection(
         movieDetailArgumentSet: MovieDetailArgumentSet
     ) = MovieShowcaseFragmentClickCallbackDirections.actionMovieShowcaseFragmentToMovieDetails(
         serializer.getStringFromObj(movieDetailArgumentSet)

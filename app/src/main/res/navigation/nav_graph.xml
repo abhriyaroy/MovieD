@@ -33,10 +33,6 @@
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details">
         <argument
-            android:name="transitionName"
-            android:defaultValue='""'
-            app:argType="string" />
-        <argument
             android:name="movieDetailData"
             android:defaultValue='""'
             app:argType="string" />

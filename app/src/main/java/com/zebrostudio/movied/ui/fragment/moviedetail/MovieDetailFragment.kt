@@ -20,7 +20,7 @@ import org.koin.android.ext.android.inject
 
 class MovieDetailFragment : Fragment() {
 
-    private val args: MovieDetailsFragmentArgs by navArgs()
+    private val args: MovieDetailFragmentArgs by navArgs()
     private val imageLoader: ImageLoader by inject()
     private val serializer: Serializer by inject()
     private lateinit var movieDetailArgumentSet: MovieDetailArgumentSet
@@ -35,15 +35,23 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
-        movieDetailArgumentSet =
-            serializer.getObjFromString(args.movieDetailData, MovieDetailArgumentSet::class.java)
+        configureTransition(view)
+        getNavArguments()
         setupTransition()
         loadPosters()
         animatePosters()
         decorateDetails()
         animateDetails()
+    }
+
+    private fun configureTransition(view: View) {
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+    }
+
+    private fun getNavArguments() {
+        movieDetailArgumentSet =
+            serializer.getObjFromString(args.movieDetailData, MovieDetailArgumentSet::class.java)
     }
 
     private fun configureSharedElementTransition() {
