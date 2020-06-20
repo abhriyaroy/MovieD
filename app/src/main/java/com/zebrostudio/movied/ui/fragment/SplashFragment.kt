@@ -11,7 +11,6 @@ import com.example.movied.R
 import com.google.android.material.snackbar.Snackbar
 import com.zebrostudio.movied.data.entity.MoviesResultEntity
 import com.zebrostudio.movied.exception.NoInternetException
-import com.zebrostudio.movied.exception.noInternetExceptionMessage
 import com.zebrostudio.movied.viewmodel.MovieViewModel
 import com.zebrostudio.movied.viewmodel.ResourceResult
 import com.zebrostudio.movied.viewmodel.Status
@@ -52,7 +51,7 @@ class SplashFragment : Fragment() {
     }
 
     private fun handleErrorState(result: ResourceResult<MoviesResultEntity>) {
-        if (result.error is NoInternetException){
+        if (result.error is NoInternetException) {
             showMovieLoadingErrorMessageWithRetryButton()
         } else {
             showGenericError()

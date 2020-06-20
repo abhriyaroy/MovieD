@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zebrostudio.movied.ui.fragment.MovieShowcaseFragment">
+    tools:context="com.zebrostudio.movied.ui.fragment.MovieShowcaseFragmentClickCallback">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/backgroundRecyclerView"

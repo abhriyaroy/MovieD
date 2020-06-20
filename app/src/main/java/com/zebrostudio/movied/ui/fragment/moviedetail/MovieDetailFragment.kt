@@ -1,4 +1,4 @@
-package com.zebrostudio.movied.ui.fragment
+package com.zebrostudio.movied.ui.fragment.moviedetail
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -10,7 +10,6 @@ import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.movied.R
-import com.zebrostudio.movied.data.entity.MovieEntity
 import com.zebrostudio.movied.util.ImageLoader
 import com.zebrostudio.movied.util.Serializer
 import com.zebrostudio.movied.util.getOrientation
@@ -19,14 +18,12 @@ import kotlinx.android.synthetic.main.fragment_movie_details.view.*
 import org.koin.android.ext.android.inject
 
 
-class MovieDetailsFragment : Fragment() {
+class MovieDetailFragment : Fragment() {
 
     private val args: MovieDetailsFragmentArgs by navArgs()
     private val imageLoader: ImageLoader by inject()
     private val serializer: Serializer by inject()
-    private var nextMovieUrl = ""
-    private var previousMovieUrl = ""
-    private lateinit var currentMovie: MovieEntity
+    private lateinit var movieDetailArgumentSet: MovieDetailArgumentSet
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +37,8 @@ class MovieDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
-        currentMovie = serializer.getObjFromString(args.movieData, MovieEntity::class.java)
+        movieDetailArgumentSet =
+            serializer.getObjFromString(args.movieDetailData, MovieDetailArgumentSet::class.java)
         setupTransition()
         loadPosters()
         animatePosters()
@@ -57,14 +55,12 @@ class MovieDetailsFragment : Fragment() {
 
     private fun setupTransition() {
         with(requireView()) {
-            this.movieCard.transitionName = currentMovie.posterUrl
-            this.movieTitle.transitionName = currentMovie.originalName
+            this.movieCard.transitionName = movieDetailArgumentSet.selectedMovieItem.posterUrl
+            this.movieTitle.transitionName = movieDetailArgumentSet.selectedMovieItem.originalName
         }
     }
 
     private fun loadPosters() {
-        previousMovieUrl = args.previousMovieUrl
-        nextMovieUrl = args.nextMovieUrl
         loadPosterImage()
         loadPreviousPosterImage()
         loadNextPosterImage()
@@ -88,10 +84,11 @@ class MovieDetailsFragment : Fragment() {
 
     private fun decorateDetails() {
         with(requireView()) {
-            this.movieTitle.text = currentMovie.originalName
-            this.movieReleaseDate.text = currentMovie.releaseDate
-            this.movieDescription.text = currentMovie.summary
-            this.movieRating.rating = (currentMovie.averageVote / 2).toFloat()
+            this.movieTitle.text = movieDetailArgumentSet.selectedMovieItem.originalName
+            this.movieReleaseDate.text = movieDetailArgumentSet.selectedMovieItem.releaseDate
+            this.movieDescription.text = movieDetailArgumentSet.selectedMovieItem.summary
+            this.movieRating.rating =
+                (movieDetailArgumentSet.selectedMovieItem.averageVote / 2).toFloat()
         }
     }
 
@@ -108,7 +105,7 @@ class MovieDetailsFragment : Fragment() {
             imageLoader.loadImage(
                 requireContext(),
                 this.mainMoviePosterCard.mainMoviePoster,
-                currentMovie.posterUrl
+                movieDetailArgumentSet.selectedMovieItem.posterUrl
             )
         }
     }
@@ -118,7 +115,7 @@ class MovieDetailsFragment : Fragment() {
             imageLoader.loadImage(
                 requireContext(),
                 this.previousMoviePosterCard.previousMoviePoster,
-                previousMovieUrl
+                movieDetailArgumentSet.previousMovieUrl
             )
         }
     }
@@ -128,7 +125,7 @@ class MovieDetailsFragment : Fragment() {
             imageLoader.loadImage(
                 requireContext(),
                 this.successorMoviePosterCard.successorMoviePoster,
-                nextMovieUrl
+                movieDetailArgumentSet.nextMovieUrl
             )
         }
     }

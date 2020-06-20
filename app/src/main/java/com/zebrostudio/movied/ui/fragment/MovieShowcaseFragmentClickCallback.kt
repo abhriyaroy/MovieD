@@ -17,6 +17,8 @@ import com.example.movied.R
 import com.zebrostudio.movied.data.entity.MovieEntity
 import com.zebrostudio.movied.ui.adapter.MovieBannerListAdapter
 import com.zebrostudio.movied.ui.adapter.MovieListAdapter
+import com.zebrostudio.movied.ui.fragment.moviedetail.MovieDetailArgumentSet
+import com.zebrostudio.movied.ui.fragment.moviedetail.MovieItemClickCallback
 import com.zebrostudio.movied.util.ImageLoader
 import com.zebrostudio.movied.util.Serializer
 import com.zebrostudio.movied.util.SnapHelper
@@ -30,7 +32,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import studio.zebro.circularrecyclerview.CircularHorizontalBTTMode
 import studio.zebro.circularrecyclerview.RotateXScaleYViewMode
 
-class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
+class MovieShowcaseFragmentClickCallback : Fragment(), MovieItemClickCallback {
 
     private val movieViewModel: MovieViewModel by sharedViewModel()
     private val imageLoader: ImageLoader by inject()
@@ -55,14 +57,13 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
 
     override fun handleClick(
         view: View,
-        previousMovieUrl: String,
-        nextMovieUrl: String,
-        movieData: MovieEntity
+        movieDetailArgumentSet: MovieDetailArgumentSet
     ) {
-        requireView().movieTitle.transitionName = movieData.originalName
-        val extras = getNavigationExtras(view, movieData)
-        val action = getNavigationAction(previousMovieUrl, nextMovieUrl, movieData)
-        requireView().findNavController().navigate(action, extras)
+        requireView().movieTitle.transitionName = movieDetailArgumentSet.selectedMovieItem.originalName
+        requireView().findNavController().navigate(
+            getNavigationAction(movieDetailArgumentSet),
+            getNavigationExtras(view, movieDetailArgumentSet.selectedMovieItem)
+        )
     }
 
     private fun setupForegroundRecyclerView() {
@@ -133,7 +134,6 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
     private fun observeMovieData() {
         movieViewModel.moviesResultData.observe(viewLifecycleOwner, Observer { movies ->
             if (movies.status == Status.SUCCESS) {
-                println(movies.data!!.moviesList)
                 movieAdapter!!.setList(movies.data!!.moviesList)
                 bannerAdapter!!.setList(movies.data.moviesList)
             }
@@ -146,22 +146,9 @@ class MovieShowcaseFragment : Fragment(), HandleMovieItemClickView {
     )
 
     private fun getNavigationAction(
-        previousMovieUrl: String,
-        nextMovieUrl: String,
-        movieData: MovieEntity
-    ) = MovieShowcaseFragmentDirections.actionMovieShowcaseFragmentToMovieDetails(
-        previousMovieUrl = previousMovieUrl,
-        nextMovieUrl = nextMovieUrl,
-        movieData = serializer.getStringFromObj(movieData)
+        movieDetailArgumentSet: MovieDetailArgumentSet
+    ) = MovieShowcaseFragmentClickCallbackDirections.actionMovieShowcaseFragmentToMovieDetails(
+        serializer.getStringFromObj(movieDetailArgumentSet)
     )
 
-}
-
-interface HandleMovieItemClickView {
-    fun handleClick(
-        view: View,
-        previousMovieUrl: String,
-        nextMovieUrl: String,
-        movieData: MovieEntity
-    )
 }
