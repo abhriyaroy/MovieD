@@ -4,29 +4,29 @@ import com.google.gson.annotations.SerializedName
 
 data class MovieEntity(
     @SerializedName("popularity")
-    var popularity: Double,
+    val popularity: Double,
     @SerializedName("vote_count")
-    var voteCount: Int,
+    val voteCount: Int,
     @SerializedName("video")
-    var video: Boolean,
+    val video: Boolean,
     @SerializedName("poster_path")
-    var posterUrl: String,
+    val posterUrl: String,
     @SerializedName("id")
-    var id: Long,
+    val id: Long,
     @SerializedName("adult")
-    var isAdult: Boolean,
+    val isAdult: Boolean,
     @SerializedName("backdrop_path")
-    var backDropUrl: String,
+    val backDropUrl: String,
     @SerializedName("original_language")
-    var originLanguage: String,
+    val originLanguage: String,
     @SerializedName("original_title")
-    var originalName: String,
+    val originalName: String,
     @SerializedName("title")
-    var title: String,
+    val title: String,
     @SerializedName("vote_average")
-    var averageVote: Double,
+    val averageVote: Double,
     @SerializedName("overview")
-    var summary: String,
+    val summary: String,
     @SerializedName("release_date")
-    var releaseDate: String
+    val releaseDate: String
 )

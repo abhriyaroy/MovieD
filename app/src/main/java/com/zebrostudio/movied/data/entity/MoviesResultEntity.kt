@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class MoviesResultEntity(
     @SerializedName("page")
-    var page: String,
+    val page: String,
     @SerializedName("results")
-    var moviesList: List<MovieEntity>
+    val moviesList: List<MovieEntity>
 )
