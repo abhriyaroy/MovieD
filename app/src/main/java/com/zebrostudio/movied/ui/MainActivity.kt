@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun enableFullScreenMode(){
+    private fun enableFullScreenMode(){
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
