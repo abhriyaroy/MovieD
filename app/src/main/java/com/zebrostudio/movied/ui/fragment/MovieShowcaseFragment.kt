@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.example.movied.R
+import com.google.android.material.snackbar.Snackbar
 import com.zebrostudio.movied.data.entity.MovieEntity
 import com.zebrostudio.movied.ui.adapter.MovieBannerListAdapter
 import com.zebrostudio.movied.ui.adapter.MovieListAdapter
@@ -27,6 +28,7 @@ import com.zebrostudio.movied.viewmodel.MovieViewModel
 import com.zebrostudio.movied.viewmodel.Status
 import kotlinx.android.synthetic.main.fragment_movie_details.view.*
 import kotlinx.android.synthetic.main.fragment_movie_showcase.*
+import kotlinx.android.synthetic.main.fragment_splash.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import studio.zebro.circularrecyclerview.CircularHorizontalBTTMode
@@ -59,7 +61,8 @@ class MovieShowcaseFragment : Fragment(), MovieItemClickCallback {
         view: View,
         movieDetailArgumentSet: MovieDetailArgumentSet
     ) {
-        requireView().movieTitle.transitionName = movieDetailArgumentSet.selectedMovieItem.originalName
+        requireView().movieTitle.transitionName =
+            movieDetailArgumentSet.selectedMovieItem.originalName
         requireView().findNavController().navigate(
             getNavigationDirection(movieDetailArgumentSet),
             getNavigationExtras(view, movieDetailArgumentSet.selectedMovieItem)
@@ -133,11 +136,30 @@ class MovieShowcaseFragment : Fragment(), MovieItemClickCallback {
 
     private fun observeMovieData() {
         movieViewModel.moviesResultData.observe(viewLifecycleOwner, Observer { movies ->
-            if (movies.status == Status.SUCCESS) {
-                movieAdapter!!.setList(movies.data!!.moviesList)
-                bannerAdapter!!.setList(movies.data.moviesList)
+            when (movies.status) {
+                Status.LOADING -> showLoadingMessage()
+                Status.SUCCESS -> showMoviesList(movies.data!!.moviesList)
+                Status.ERROR -> showErrorMessageWithRetryOption()
             }
         })
+    }
+
+    private fun showLoadingMessage() {
+        Snackbar.make(coordinatorSplash, R.string.loading_movies, Snackbar.LENGTH_INDEFINITE)
+            .show()
+    }
+
+    private fun showMoviesList(list: List<MovieEntity>) {
+        movieAdapter!!.setList(list)
+        bannerAdapter!!.setList(list)
+    }
+
+    private fun showErrorMessageWithRetryOption() {
+        Snackbar.make(coordinatorSplash, R.string.failed_to_load_movies, Snackbar.LENGTH_INDEFINITE)
+            .apply {
+                setAction(R.string.retry) { movieViewModel.getPopularMovies() }
+                show()
+            }
     }
 
     private fun getNavigationExtras(view: View, movieData: MovieEntity) = FragmentNavigatorExtras(
@@ -147,7 +169,7 @@ class MovieShowcaseFragment : Fragment(), MovieItemClickCallback {
 
     private fun getNavigationDirection(
         movieDetailArgumentSet: MovieDetailArgumentSet
-    ) = MovieShowcaseFragmentClickCallbackDirections.actionMovieShowcaseFragmentToMovieDetails(
+    ) = MovieShowcaseFragmentDirections.actionMovieShowcaseFragmentToMovieDetails(
         serializer.getStringFromObj(movieDetailArgumentSet)
     )
 

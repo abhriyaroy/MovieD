@@ -3,6 +3,7 @@
 
     <string name="tag_is_center">tagIsCenter</string>
     <string name="view_details">View Details</string>
+    <string name="loading_movies">Loading movies list…</string>
     <string name="failed_to_load_movies">Failed to load movies list</string>
     <string name="retry">Retry</string>
     <string name="something_went_wrong">Something went wrong</string>
