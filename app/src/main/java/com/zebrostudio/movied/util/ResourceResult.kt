@@ -1,12 +1,17 @@
-package com.zebrostudio.movied.viewmodel
+package com.zebrostudio.movied.util
 
+import com.zebrostudio.movied.viewmodel.Status
 import com.zebrostudio.movied.viewmodel.Status.*
 import java.lang.Exception
 
 data class ResourceResult<out T>(val status: Status, val data: T?, val error: Exception?) {
     companion object {
         fun <T> success(data: T?): ResourceResult<T> {
-            return ResourceResult(SUCCESS, data, null)
+            return ResourceResult(
+                SUCCESS,
+                data,
+                null
+            )
         }
 
         fun <T> error(error: Exception?): ResourceResult<T> {
@@ -14,7 +19,11 @@ data class ResourceResult<out T>(val status: Status, val data: T?, val error: Ex
         }
 
         fun <T> loading(data: T? = null): ResourceResult<T> {
-            return ResourceResult(LOADING, data, null)
+            return ResourceResult(
+                LOADING,
+                data,
+                null
+            )
         }
     }
 }

@@ -63,8 +63,8 @@ class MovieDetailFragment : Fragment() {
 
     private fun setupTransition() {
         with(requireView()) {
-            this.movieCard.transitionName = movieDetailArgumentSet.selectedMovieItem.posterUrl
-            this.movieTitle.transitionName = movieDetailArgumentSet.selectedMovieItem.originalName
+            movieCard.transitionName = movieDetailArgumentSet.selectedMovieItem.posterUrl
+            movieTitle.transitionName = movieDetailArgumentSet.selectedMovieItem.originalName
         }
     }
 
@@ -77,34 +77,34 @@ class MovieDetailFragment : Fragment() {
     private fun animatePosters() {
         if (requireContext().getOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
             with(requireView()) {
-                this.previousMoviePosterCard.showAnimation(R.anim.slide_left)
-                this.mainMoviePosterCard.showAnimation(R.anim.slide_left, delay = 50)
-                this.successorMoviePosterCard.showAnimation(R.anim.slide_left, delay = 50)
+                previousMoviePosterCard.showAnimation(R.anim.slide_left)
+                mainMoviePosterCard.showAnimation(R.anim.slide_left, delay = 50)
+                successorMoviePosterCard.showAnimation(R.anim.slide_left, delay = 50)
             }
         } else {
             with(requireView()) {
-                this.mainMoviePosterCard.showAnimation(R.anim.slide_up)
-                this.previousMoviePosterCard.showAnimation(R.anim.slide_up, delay = 50)
-                this.successorMoviePosterCard.showAnimation(R.anim.slide_up, delay = 50)
+                mainMoviePosterCard.showAnimation(R.anim.slide_up)
+                previousMoviePosterCard.showAnimation(R.anim.slide_up, delay = 50)
+                successorMoviePosterCard.showAnimation(R.anim.slide_up, delay = 50)
             }
         }
     }
 
     private fun decorateDetails() {
         with(requireView()) {
-            this.movieTitle.text = movieDetailArgumentSet.selectedMovieItem.originalName
-            this.movieReleaseDate.text = movieDetailArgumentSet.selectedMovieItem.releaseDate
-            this.movieDescription.text = movieDetailArgumentSet.selectedMovieItem.summary
-            this.movieRating.rating =
+            movieTitle.text = movieDetailArgumentSet.selectedMovieItem.originalName
+            movieReleaseDate.text = movieDetailArgumentSet.selectedMovieItem.releaseDate
+            movieDescription.text = movieDetailArgumentSet.selectedMovieItem.summary
+            movieRating.rating =
                 (movieDetailArgumentSet.selectedMovieItem.averageVote / 2).toFloat()
         }
     }
 
     private fun animateDetails() {
         with(requireView()) {
-            this.movieReleaseDate.showAnimation(R.anim.slide_up_fade_in)
-            this.movieDescription.showAnimation(R.anim.slide_up_fade_in)
-            this.movieRating.showAnimation(R.anim.slide_up_fade_in)
+            movieReleaseDate.showAnimation(R.anim.slide_up_fade_in)
+            movieDescription.showAnimation(R.anim.slide_up_fade_in)
+            movieRating.showAnimation(R.anim.slide_up_fade_in)
         }
     }
 
@@ -112,7 +112,7 @@ class MovieDetailFragment : Fragment() {
         with(requireView()) {
             imageLoader.loadImage(
                 requireContext(),
-                this.mainMoviePosterCard.mainMoviePoster,
+                mainMoviePosterCard.mainMoviePoster,
                 movieDetailArgumentSet.selectedMovieItem.posterUrl
             )
         }
@@ -122,7 +122,7 @@ class MovieDetailFragment : Fragment() {
         with(requireView()) {
             imageLoader.loadImage(
                 requireContext(),
-                this.previousMoviePosterCard.previousMoviePoster,
+                previousMoviePosterCard.previousMoviePoster,
                 movieDetailArgumentSet.previousMovieUrl
             )
         }
@@ -132,7 +132,7 @@ class MovieDetailFragment : Fragment() {
         with(requireView()) {
             imageLoader.loadImage(
                 requireContext(),
-                this.successorMoviePosterCard.successorMoviePoster,
+                successorMoviePosterCard.successorMoviePoster,
                 movieDetailArgumentSet.nextMovieUrl
             )
         }

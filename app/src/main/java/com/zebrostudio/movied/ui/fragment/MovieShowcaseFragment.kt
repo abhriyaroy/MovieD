@@ -32,7 +32,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import studio.zebro.circularrecyclerview.CircularHorizontalBTTMode
 import studio.zebro.circularrecyclerview.RotateXScaleYViewMode
 
-class MovieShowcaseFragmentClickCallback : Fragment(), MovieItemClickCallback {
+class MovieShowcaseFragment : Fragment(), MovieItemClickCallback {
 
     private val movieViewModel: MovieViewModel by sharedViewModel()
     private val imageLoader: ImageLoader by inject()

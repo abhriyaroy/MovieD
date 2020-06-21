@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.zebrostudio.movied.data.entity.MoviesResultEntity
 import com.zebrostudio.movied.exception.NoInternetException
 import com.zebrostudio.movied.viewmodel.MovieViewModel
-import com.zebrostudio.movied.viewmodel.ResourceResult
+import com.zebrostudio.movied.util.ResourceResult
 import com.zebrostudio.movied.viewmodel.Status
 import kotlinx.android.synthetic.main.fragment_splash.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel

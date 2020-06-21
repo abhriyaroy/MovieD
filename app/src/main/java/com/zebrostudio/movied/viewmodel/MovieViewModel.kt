@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zebrostudio.movied.data.MovieDataRepository
 import com.zebrostudio.movied.data.entity.MoviesResultEntity
+import com.zebrostudio.movied.util.ResourceResult
 import kotlinx.coroutines.launch
 
 class MovieViewModel(private val movieDataRepository: MovieDataRepository) : ViewModel() {

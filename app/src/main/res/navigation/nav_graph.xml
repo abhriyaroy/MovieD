@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieShowcaseFragment"
-        android:name="com.zebrostudio.movied.ui.fragment.MovieShowcaseFragmentClickCallback"
+        android:name="com.zebrostudio.movied.ui.fragment.MovieShowcaseFragment"
         android:label="fragment_movie_showcase"
         tools:layout="@layout/fragment_movie_showcase">
         <action

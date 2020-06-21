@@ -6,7 +6,7 @@ import com.zebrostudio.movied.data.datasource.remote.MoviesRemoteDataSource
 import com.zebrostudio.movied.data.entity.MoviesResultEntity
 import com.zebrostudio.movied.exception.MovieFetchException
 import com.zebrostudio.movied.exception.NoInternetException
-import com.zebrostudio.movied.viewmodel.ResourceResult
+import com.zebrostudio.movied.util.ResourceResult
 import java.net.UnknownHostException
 
 
