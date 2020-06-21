@@ -44,5 +44,5 @@ val uiModule: Module = module {
     single<ImageLoader> { ImageLoaderImpl() }
 }
 
-fun provideMovieService(retrofit: Retrofit): MovieService =
+private fun provideMovieService(retrofit: Retrofit): MovieService =
     retrofit.create(MovieService::class.java)

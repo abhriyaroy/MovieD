@@ -1,6 +1,6 @@
 apply from: '../dependencies.gradle'
 
-ext.APP_MODULE_DEPENDENCIES = {
+ext.app_module_dependencies = {
     dependencies {
         implementation deps.kotlin
         implementation deps.androidx_appcompat

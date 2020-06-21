@@ -25,4 +25,4 @@ android {
     }
 }
 
-CIRCULAR_RECYCLER_VIEW_DEPENDENCIES()
+circular_recycler_view_dependencies()

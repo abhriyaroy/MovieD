@@ -1,6 +1,6 @@
 apply from: '../dependencies.gradle'
 
-ext.CIRCULAR_RECYCLER_VIEW_DEPENDENCIES = {
+ext.circular_recycler_view_dependencies = {
     dependencies{
         implementation deps.kotlin
         implementation deps.androidx_appcompat

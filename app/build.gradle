@@ -37,4 +37,4 @@ android {
 
 }
 
-APP_MODULE_DEPENDENCIES()
+app_module_dependencies()
